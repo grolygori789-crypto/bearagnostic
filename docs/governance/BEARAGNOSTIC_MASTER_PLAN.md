@@ -1,6 +1,6 @@
 # BEARAGNOSTIC — MASTER PLAN
 
-**Revision:** 1.0  
+**Revision:** 1.1  
 **Project:** Bearagnostic  
 **Studio / Publisher:** Benedict Interactive  
 **Project Owner / IP Owner:** P’Benz  
@@ -8,7 +8,7 @@
 **Primary Platform:** Mobile-first HTML/CSS/JavaScript Progressive Web App  
 **Primary Hosting:** GitHub Pages  
 **Target Complexity:** approximately 5.5/10 maximum  
-**Current State:** Foundation / Governance; runtime not yet started
+**Current State:** Build 1 runtime foundation / deployment candidate
 
 ---
 
@@ -236,7 +236,20 @@ Use:
 - keyboard-safe forms;
 - portrait-first composition.
 
-### 6.3 Zoom lock
+### 6.3 Portrait orientation lock
+
+P’Benz requires Bearagnostic to remain portrait-first and prevent ordinary in-app rotation wherever the platform permits it.
+
+Implementation target:
+
+- manifest `orientation: portrait`;
+- Screen Orientation API lock in installed-PWA environments where supported;
+- a professional portrait-required guard when a browser or OS ignores the requested lock;
+- no broken landscape layout exposed as a normal app state.
+
+**Platform boundary:** web applications cannot override every OS/browser orientation policy. The product must enforce portrait at the strongest honest level available and provide a clear fallback instead of claiming impossible control.
+
+### 6.4 Zoom lock
 
 The app will request a fixed mobile viewport using a production viewport policy equivalent to:
 
@@ -253,7 +266,7 @@ Additional touch/gesture handling may be used where necessary to suppress pinch/
 
 Because zoom is intentionally restricted, the design must compensate with highly readable type, generous touch targets, strong contrast, and responsive sizing.
 
-### 6.4 Automatic full-screen / app-like launch
+### 6.5 Automatic full-screen / app-like launch
 
 Primary installed-PWA target:
 
@@ -283,12 +296,22 @@ First launch:
 
 - short Benedict Interactive ident;
 - soft transition to Bearagnostic;
-- one-screen explanation of selected-file scope and local analysis;
-- Continue to Home.
+- reveal the premium Home shell;
+- show a single first-run install/trust sheet with language controls and selected-file/local-analysis scope;
+- allow install or a clear “not now” path without blocking future use.
 
 Repeat launch should be substantially shorter.
 
 Optional opening layers must fail open. Branding must never brick startup.
+
+### 7.1 Professional close / exit behavior
+
+Bearagnostic provides a deliberate **Close Bearagnostic** action from the app menu rather than placing a persistent desktop-style close button over the main UI.
+
+- use a clear confirmation step;
+- attempt `window.close()` only from the explicit user action where permitted;
+- when the browser/PWA environment refuses self-close, show a clean exit state explaining how to dismiss the app from recent apps;
+- never claim the app closed when the platform kept it open.
 
 ---
 
@@ -429,10 +452,11 @@ Do not cache user-selected file contents as app assets.
 
 Runtime Build and semantic App Version are separate.
 
-Because the current repository contains no runtime yet:
+Current runtime foundation:
 
-- initial App Version target: `0.1.0`;
-- first runtime Build: `1`;
+- App Version: `0.1.0`;
+- Runtime Build: `1`;
+- service-worker cache identity: `bearagnostic-app-b1`;
 - Legal Version target: `1.0.0` when the legal layer is introduced.
 
 Every runtime change must increment Build.
@@ -514,13 +538,12 @@ Support failure must not affect core app behavior.
 Launch target:
 
 - English
-- Thai
+- Japanese (`日本語`)
+- Thai (`ไทย`)
 
-Architecture remains localization-ready.
+Each language must read as naturally authored product copy, not literal machine translation. The tone stays premium, concise, calm, and easy to understand in each locale.
 
-Copy must be naturally authored rather than mechanically translated.
-
-Brand names remain unchanged.
+Language selection persists locally and remains available from the app UI. Brand names remain unchanged.
 
 ---
 
@@ -615,6 +638,9 @@ Deliver:
 - app icon;
 - opening sequence;
 - premium responsive Home;
+- English / Japanese / Thai localization foundation;
+- first-run install guidance;
+- professional close / exit flow;
 - Settings/About shell.
 
 **Exit condition:** a stable, installable, visually premium shell that fits target devices and starts reliably.

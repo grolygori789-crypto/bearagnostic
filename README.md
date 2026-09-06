@@ -10,17 +10,19 @@ Bearagnostic is a mobile-first Progressive Web App (PWA) centered on Dr. Bear: a
 - Honest browser/PWA capability claims; no fake whole-device scan, RAM/CPU cleaner, antivirus, or fabricated diagnostics.
 - Premium Clean Clinical Editorial design with the approved Dr. Bear identity.
 - Simple, robust architecture: semantic HTML, modern CSS, vanilla JavaScript, browser-native APIs, service worker, and web manifest.
-- Mobile-first responsive behavior across common Android and iPhone viewport sizes.
+- Mobile-first responsive behavior across common Android and iPhone viewport sizes, with a portrait-first installed-PWA experience.
+- Native-quality copy in English, Japanese, and Thai.
 - Stable canonical file paths and an overwrite-first update policy to keep the repository clean.
 
 ## Current repository state
 
-This repository is in **Foundation / Governance** state.
+This repository now contains the **Build 1 runtime foundation**.
 
-- Runtime application code has not started yet.
-- No production runtime Build is claimed yet.
-- The first runtime candidate will begin at **App Version 0.1.0 / Build 1** unless production establishes a newer value first.
-- Approved visual assets and project governance are stored in canonical paths.
+- App Version: **0.1.0**
+- Runtime Build: **1**
+- Build 1 includes the Benedict Interactive opening, Bearagnostic product reveal, premium responsive Home, portrait/zoom-lock foundation, installable PWA shell, app icon set, first-run install guidance, professional close/exit flow, and English / Japanese / Thai localization.
+- Real file-analysis logic remains intentionally deferred to the Checkup Core so the shell never fabricates scan results.
+- Approved visual assets and project governance remain stored in canonical paths.
 
 ## Canonical documents
 
