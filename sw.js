@@ -1,4 +1,4 @@
-const BUILD = 1;
+const BUILD = 2;
 const CACHE_NAME = `bearagnostic-app-b${BUILD}`;
 const APP_SHELL = [
   './',
@@ -8,6 +8,8 @@ const APP_SHELL = [
   './js/config/i18n.js',
   './js/core/app.js',
   './manifest.webmanifest',
+  './assets/brand/bearagnostic-wordmark.png',
+  './assets/brand/home-editorial-still-life.webp',
   './assets/icons/app-icon-192.png',
   './assets/icons/app-icon-512.png',
   './assets/icons/app-icon-maskable-192.png',
@@ -15,17 +17,22 @@ const APP_SHELL = [
   './assets/icons/apple-touch-icon.png',
   './assets/icons/favicon-32.png',
   './assets/mascot/dr-bear-approved.png',
-  './assets/brand/home-editorial-still-life.webp'
+  './assets/mascot/dr-bear-scanning.png'
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)));
+  self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((key) => key.startsWith('bearagnostic-app-b') && key !== CACHE_NAME).map((key) => caches.delete(key))))
+      .then((keys) => Promise.all(
+        keys
+          .filter((key) => key.startsWith('bearagnostic-app-b') && key !== CACHE_NAME)
+          .map((key) => caches.delete(key))
+      ))
       .then(() => self.clients.claim())
   );
 });

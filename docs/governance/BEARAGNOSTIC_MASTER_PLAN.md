@@ -1,6 +1,6 @@
 # BEARAGNOSTIC — MASTER PLAN
 
-**Revision:** 1.1  
+**Revision:** 1.2  
 **Project:** Bearagnostic  
 **Studio / Publisher:** Benedict Interactive  
 **Project Owner / IP Owner:** P’Benz  
@@ -8,7 +8,7 @@
 **Primary Platform:** Mobile-first HTML/CSS/JavaScript Progressive Web App  
 **Primary Hosting:** GitHub Pages  
 **Target Complexity:** approximately 5.5/10 maximum  
-**Current State:** Build 1 runtime foundation / deployment candidate
+**Current State:** Build 2 visual-fidelity correction / deployment candidate
 
 ---
 
@@ -177,7 +177,27 @@ Canonical visual language:
 - no random multicolor gradients;
 - no fake technical gauges.
 
-### 5.3 Dr. Bear identity
+### 5.3 Approved Home mockup fidelity lock
+
+The approved Home mockup supplied by P’Benz is the **layout and visual-composition authority** for the Home screen. It is not a loose inspiration reference. Production must preserve, as closely as practical:
+
+- the wordmark/settings header balance;
+- the open editorial hero rather than enclosing the hero in a generic card;
+- the large Dr. Bear anchor on the right;
+- editorial copy on the left;
+- the blue horizontal primary Checkup panel;
+- four compact quick-tool cards in one row;
+- the single horizontal File Health card;
+- the lifestyle/editorial card;
+- five-item bottom navigation;
+- the Benedict Interactive/version footer;
+- the overall vertical rhythm, density, corner language, shadows, typography hierarchy, and premium white/blue tone.
+
+Truthful capability wording may differ from the visual mockup where required. For example, production uses **Start Checkup** rather than implying a whole-device scan, and uses truthful selected-file categories.
+
+**Acceptance rule:** if a production screenshot placed beside the approved mockup reads as a materially different app or composition, visual QA fails even if functionality passes. Responsive adaptation must preserve the composition before redesigning it.
+
+### 5.4 Dr. Bear identity
 
 The approved mascot identity is locked across:
 

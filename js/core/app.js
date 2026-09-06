@@ -4,6 +4,10 @@
   const config = window.BEARAGNOSTIC_CONFIG;
   const translations = window.BEARAGNOSTIC_I18N;
   const root = document.documentElement;
+
+  const qs = (selector, scope = document) => scope.querySelector(selector);
+  const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
+
   const storage = {
     get(key, fallback = null) {
       try { return localStorage.getItem(config.storagePrefix + key) ?? fallback; } catch { return fallback; }
@@ -13,15 +17,12 @@
     }
   };
 
-  const qs = (selector, scope = document) => scope.querySelector(selector);
-  const qsa = (selector, scope = document) => [...scope.querySelectorAll(selector)];
-
   const studioLaunch = qs('#studioLaunch');
   const appRoot = qs('#appRoot');
   const scrim = qs('#scrim');
   const firstRunSheet = qs('#firstRunSheet');
-  const languageSheet = qs('#languageSheet');
   const menuSheet = qs('#menuSheet');
+  const languageSheet = qs('#languageSheet');
   const infoSheet = qs('#infoSheet');
   const closeSheet = qs('#closeSheet');
   const exitState = qs('#exitState');
@@ -72,17 +73,21 @@
       if (translations[lang][key] != null) node.innerHTML = translations[lang][key];
     });
 
-    qs('#languageBadge').textContent = translations[lang].badge;
-    qs('#currentLanguageLabel').textContent = translations[lang].label;
+    const label = qs('#currentLanguageLabel');
+    if (label) label.textContent = translations[lang].label;
     qsa('[data-lang]').forEach((button) => button.classList.toggle('is-active', button.dataset.lang === lang));
     updateInstallUI();
   }
 
   function hydrateBuild() {
-    const versionTargets = ['#appVersion', '#menuVersion'];
-    const buildTargets = ['#buildNumber', '#menuBuild'];
-    versionTargets.forEach((selector) => { const el = qs(selector); if (el) el.textContent = config.appVersion; });
-    buildTargets.forEach((selector) => { const el = qs(selector); if (el) el.textContent = config.build; });
+    ['#appVersion', '#menuVersion'].forEach((selector) => {
+      const el = qs(selector);
+      if (el) el.textContent = config.appVersion;
+    });
+    ['#buildNumber', '#menuBuild'].forEach((selector) => {
+      const el = qs(selector);
+      if (el) el.textContent = config.build;
+    });
   }
 
   function openSheet(sheet) {
@@ -95,7 +100,6 @@
       scrim.classList.add('is-visible');
       sheet.classList.add('is-open');
     });
-    document.body.style.overflow = 'hidden';
   }
 
   function closeSheetPanel(sheet = activeSheet, animate = true) {
@@ -107,10 +111,9 @@
       if (!qsa('.sheet.is-open').length) {
         scrim.hidden = true;
         activeSheet = null;
-        document.body.style.overflow = '';
       }
     };
-    if (animate) setTimeout(finish, 240); else finish();
+    if (animate) setTimeout(finish, 250); else finish();
   }
 
   function showToast(message) {
@@ -122,7 +125,7 @@
     toastTimer = setTimeout(() => {
       toast.classList.remove('is-visible');
       setTimeout(() => { toast.hidden = true; }, 190);
-    }, 2600);
+    }, 2400);
   }
 
   async function tryOrientationLock() {
@@ -136,6 +139,12 @@
     });
     document.addEventListener('touchmove', (event) => {
       if (event.touches && event.touches.length > 1) event.preventDefault();
+    }, { passive: false });
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', (event) => {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) event.preventDefault();
+      lastTouchEnd = now;
     }, { passive: false });
     document.addEventListener('dblclick', (event) => event.preventDefault(), { passive: false });
     document.addEventListener('wheel', (event) => {
@@ -181,7 +190,7 @@
       try {
         const choice = await promptEvent.userChoice;
         if (choice?.outcome === 'accepted') {
-          storage.set('installPromptHandled', '1');
+          storage.set('firstRunSeen', '1');
           closeSheetPanel(firstRunSheet);
           showToast(t('installAccepted'));
         }
@@ -194,21 +203,21 @@
   }
 
   function shouldShowFirstRun() {
-    if (isStandalone()) return false;
-    return storage.get('firstRunSeen') !== '1';
+    return !isStandalone() && storage.get('firstRunSeen') !== '1';
   }
 
   function showFirstRun() {
     if (!shouldShowFirstRun()) return;
-    setTimeout(() => openSheet(firstRunSheet), 120);
+    setTimeout(() => openSheet(firstRunSheet), 130);
   }
 
   function playLaunch() {
     const returning = storage.get('hasLaunched') === '1';
-    const studioMs = returning ? 360 : 760;
-    const productMs = returning ? 360 : 680;
+    const studioMs = returning ? 330 : 720;
+    const productMs = returning ? 340 : 650;
 
     appRoot.hidden = false;
+    studioLaunch.hidden = false;
     studioLaunch.classList.add('launch--visible');
 
     setTimeout(() => studioLaunch.classList.add('is-product'), studioMs);
@@ -216,8 +225,9 @@
       studioLaunch.classList.remove('launch--visible');
       setTimeout(() => {
         studioLaunch.hidden = true;
+        studioLaunch.classList.remove('is-product');
         showFirstRun();
-      }, 330);
+      }, 340);
       storage.set('hasLaunched', '1');
     }, studioMs + productMs);
   }
@@ -228,7 +238,6 @@
 
   function handleCloseApp() {
     closeSheetPanel(closeSheet, false);
-    document.body.style.overflow = 'hidden';
     try { window.close(); } catch {}
     setTimeout(() => {
       if (document.visibilityState !== 'hidden') {
@@ -241,7 +250,6 @@
   function returnToApp() {
     exitState.hidden = true;
     appRoot.hidden = false;
-    document.body.style.overflow = '';
   }
 
   function registerServiceWorker() {
@@ -260,68 +268,72 @@
 
     window.addEventListener('appinstalled', () => {
       deferredInstallPrompt = null;
-      storage.set('installPromptHandled', '1');
       storage.set('firstRunSeen', '1');
-      closeSheetPanel(firstRunSheet);
+      closeSheetPanel(firstRunSheet, false);
       updateInstallUI();
     });
 
-    qs('#languageButton').addEventListener('click', () => openSheet(languageSheet));
-    qs('#menuButton').addEventListener('click', () => openSheet(menuSheet));
-    qs('#menuLanguage').addEventListener('click', () => {
-      closeSheetPanel(menuSheet, false);
-      openSheet(languageSheet);
-    });
-    menuInstall.addEventListener('click', () => {
+    qs('#menuButton')?.addEventListener('click', () => openSheet(menuSheet));
+    qs('#languageRow')?.addEventListener('click', () => openSheet(languageSheet));
+    qs('#menuInstall')?.addEventListener('click', () => {
       closeSheetPanel(menuSheet, false);
       openSheet(firstRunSheet);
     });
-    qs('#menuClose').addEventListener('click', () => {
-      closeSheetPanel(menuSheet, false);
-      openSheet(closeSheet);
-    });
-
-    installPrimary.addEventListener('click', handleInstallAction);
-    qs('#installLater').addEventListener('click', () => {
-      storage.set('firstRunSeen', '1');
-      closeSheetPanel(firstRunSheet);
+    qs('#startCheckup')?.addEventListener('click', showFoundationInfo);
+    qsa('[data-tool]').forEach((button) => button.addEventListener('click', showFoundationInfo));
+    qsa('[data-nav]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const target = button.dataset.nav;
+        if (target === 'home') {
+          qs('#homeScroll')?.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+        if (target === 'more') {
+          openSheet(menuSheet);
+          return;
+        }
+        showFoundationInfo();
+      });
     });
 
     qsa('[data-lang]').forEach((button) => {
       button.addEventListener('click', () => {
         applyLanguage(button.dataset.lang);
-        if (button.closest('#languageSheet')) setTimeout(() => closeSheetPanel(languageSheet), 110);
+        closeSheetPanel(languageSheet);
       });
     });
 
-    qsa('[data-close-sheet]').forEach((button) => button.addEventListener('click', () => closeSheetPanel(button.closest('.sheet'))));
-    scrim.addEventListener('click', () => {
-      if (activeSheet === firstRunSheet && storage.get('firstRunSeen') !== '1') return;
-      closeSheetPanel(activeSheet);
+    qsa('[data-close-sheet]').forEach((button) => button.addEventListener('click', () => closeSheetPanel()));
+    scrim?.addEventListener('click', () => closeSheetPanel());
+
+    installPrimary?.addEventListener('click', handleInstallAction);
+    qs('#installLater')?.addEventListener('click', () => {
+      storage.set('firstRunSeen', '1');
+      closeSheetPanel(firstRunSheet);
     });
 
-    qs('#startCheckup').addEventListener('click', showFoundationInfo);
-    qsa('[data-tool]').forEach((button) => button.addEventListener('click', () => showToast(t('toolInfo'))));
+    qs('#closeAppButton')?.addEventListener('click', () => {
+      closeSheetPanel(menuSheet, false);
+      openSheet(closeSheet);
+    });
+    qs('#confirmCloseApp')?.addEventListener('click', handleCloseApp);
+    qs('#returnToApp')?.addEventListener('click', returnToApp);
 
-    qs('#cancelClose').addEventListener('click', () => closeSheetPanel(closeSheet));
-    qs('#confirmClose').addEventListener('click', handleCloseApp);
-    qs('#returnToApp').addEventListener('click', returnToApp);
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') tryOrientationLock();
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && activeSheet) closeSheetPanel();
     });
   }
 
-  function boot() {
+  function init() {
     hydrateBuild();
     applyLanguage(currentLanguage, false);
     preventZoomGestures();
     bindEvents();
     registerServiceWorker();
+    updateInstallUI();
     tryOrientationLock();
     playLaunch();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
-  else boot();
+  init();
 })();

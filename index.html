@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#f7f9fc">
+  <meta name="theme-color" content="#f8fbff">
   <meta name="color-scheme" content="light">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -20,158 +20,144 @@
 <body>
   <div id="studioLaunch" class="launch launch--visible" aria-hidden="true">
     <section class="launch__stage launch__stage--studio">
-      <div class="studio-mark" aria-hidden="true">
-        <span class="studio-mark__line studio-mark__line--a"></span>
-        <span class="studio-mark__line studio-mark__line--b"></span>
-        <span class="studio-mark__core"></span>
-      </div>
-      <div class="studio-wordmark">
-        <strong>BENEDICT</strong>
-        <span>INTERACTIVE</span>
-      </div>
-      <div class="studio-scanline" aria-hidden="true"></div>
+      <div class="studio-emblem" aria-hidden="true"><span></span><span></span><i></i></div>
+      <div class="studio-copy"><strong>BENEDICT</strong><span>INTERACTIVE</span></div>
+      <div class="studio-sheen" aria-hidden="true"></div>
     </section>
-
     <section class="launch__stage launch__stage--product">
-      <div class="product-reveal__halo" aria-hidden="true"></div>
-      <img class="product-reveal__icon" src="./assets/icons/app-icon-512.png" alt="">
-      <div class="product-reveal__name">Bear<span>agnostic</span></div>
-      <div class="product-reveal__tag">DEVICE HEALTH · BETTER DAYS</div>
+      <div class="product-aura" aria-hidden="true"></div>
+      <img src="./assets/icons/app-icon-512.png" class="product-icon" alt="">
+      <img src="./assets/brand/bearagnostic-wordmark.png" class="product-wordmark" alt="Bearagnostic">
+      <div class="product-tag">FILE HEALTH · BRIGHTER DAYS</div>
     </section>
   </div>
 
   <div id="orientationGuard" class="orientation-guard" role="alert" aria-live="assertive">
-    <div class="orientation-guard__phone" aria-hidden="true">
-      <span></span>
-    </div>
+    <div class="orientation-phone" aria-hidden="true"><span></span></div>
     <strong data-i18n="portraitTitle">Portrait mode only</strong>
     <p data-i18n="portraitBody">Turn your phone upright to continue.</p>
   </div>
 
   <div id="appRoot" class="app-shell" hidden>
-    <header class="app-header shell-width">
-      <a class="brand-lockup" href="#home" aria-label="Bearagnostic home">
-        <img src="./assets/icons/app-icon-192.png" alt="" width="42" height="42">
-        <span class="brand-lockup__text">
-          <strong>Bear<span>agnostic</span></strong>
-          <small data-i18n="brandTagline">File health, thoughtfully.</small>
-        </span>
-      </a>
+    <div class="home-scroll" id="homeScroll">
+      <main class="home-page" id="home">
+        <section class="hero-zone" aria-labelledby="heroHeadline">
+          <header class="home-header">
+            <div class="home-brand">
+              <img class="home-wordmark" src="./assets/brand/bearagnostic-wordmark.png" alt="Bearagnostic">
+              <span class="home-brand__tag">FILE HEALTH <i></i> BRIGHTER DAYS</span>
+            </div>
+            <button id="menuButton" class="settings-button" type="button" aria-label="Open settings">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.2A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4Zm7.4-3.2a7.7 7.7 0 0 0-.1-1l2-1.6-2-3.4-2.5 1a8.4 8.4 0 0 0-1.8-1L14.6 3h-4L10 6a8.4 8.4 0 0 0-1.8 1l-2.5-1-2 3.4 2 1.6a7.7 7.7 0 0 0 0 2l-2 1.6 2 3.4 2.5-1a8.4 8.4 0 0 0 1.8 1l.6 3h4l.6-3a8.4 8.4 0 0 0 1.8-1l2.5 1 2-3.4-2-1.6c0-.3.1-.7.1-1Z"/></svg>
+            </button>
+          </header>
 
-      <div class="header-actions">
-        <button id="languageButton" class="icon-button language-button" type="button" aria-label="Change language">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0c2.2-2.3 3.4-5.4 3.4-9S14.2 5.3 12 3m0 18c-2.2-2.3-3.4-5.4-3.4-9S9.8 5.3 12 3M3.6 9h16.8M3.6 15h16.8"/></svg>
-          <span id="languageBadge">EN</span>
-        </button>
-        <button id="menuButton" class="icon-button" type="button" aria-label="Open menu">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.2A3.2 3.2 0 1 0 12 8.8a3.2 3.2 0 0 0 0 6.4Zm7.4-3.2a7.7 7.7 0 0 0-.1-1l2-1.6-2-3.4-2.5 1a8.4 8.4 0 0 0-1.8-1L14.6 3h-4L10 6a8.4 8.4 0 0 0-1.8 1l-2.5-1-2 3.4 2 1.6a7.7 7.7 0 0 0 0 2l-2 1.6 2 3.4 2.5-1a8.4 8.4 0 0 0 1.8 1l.6 3h4l.6-3a8.4 8.4 0 0 0 1.8-1l2.5 1 2-3.4-2-1.6c0-.3.1-.7.1-1Z"/></svg>
-        </button>
-      </div>
-    </header>
-
-    <main id="home" class="home shell-width">
-      <section class="hero-card" aria-labelledby="heroTitle">
-        <div class="hero-card__ambient hero-card__ambient--one" aria-hidden="true"></div>
-        <div class="hero-card__ambient hero-card__ambient--two" aria-hidden="true"></div>
-        <div class="hero-card__copy">
-          <span class="eyebrow"><span class="eyebrow__dot"></span><span data-i18n="heroEyebrow">A small checkup goes a long way</span></span>
-          <h1 id="heroTitle" data-i18n-html="heroTitle"><em>Keep what matters.</em><br>Review the rest.</h1>
-          <p data-i18n="heroBody">Bearagnostic checks only the files you choose—clearly, locally, and without pretending to scan your whole device.</p>
-          <span class="hero-card__signature" data-i18n="heroSignature">Small checks. Better days.</span>
-        </div>
-        <img class="hero-card__bear" src="./assets/mascot/dr-bear-approved.png" alt="Dr. Bear giving a thumbs-up">
-      </section>
-
-      <button id="startCheckup" class="checkup-cta" type="button">
-        <span class="checkup-cta__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M3.5 12h4l2-5 4 10 2-5h5"/></svg>
-        </span>
-        <span class="checkup-cta__copy">
-          <strong data-i18n="startCheckup">Start Checkup</strong>
-          <small data-i18n="startCheckupBody">Choose files or a folder to analyze.</small>
-        </span>
-        <span class="checkup-cta__arrow" aria-hidden="true">→</span>
-      </button>
-
-      <section class="section-block" aria-labelledby="quickToolsTitle">
-        <div class="section-heading">
-          <div>
-            <span class="section-heading__kicker" data-i18n="quickKicker">FOCUSED REVIEW</span>
-            <h2 id="quickToolsTitle" data-i18n="quickTools">Quick tools</h2>
+          <div class="hero-copy">
+            <h1 id="heroHeadline" data-i18n-html="heroTitle"><em>A cleaner file set</em><br>for a calmer day.</h1>
+            <span class="hero-hand" data-i18n-html="heroSignature">Small<br>Checks<br>Brighter<br>Days</span>
           </div>
-          <span class="section-heading__note" data-i18n="selectedScope">Selected files only</span>
-        </div>
 
-        <div class="tool-grid">
-          <button class="tool-card" type="button" data-tool="duplicates">
-            <span class="tool-card__icon tool-card__icon--blue" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><rect x="7" y="7" width="11" height="11" rx="2"/><path d="M15 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
-            </span>
-            <span class="tool-card__copy"><strong data-i18n="duplicates">Duplicates</strong><small data-i18n="duplicatesBody">Spot repeated content worth reviewing.</small></span>
-            <span class="tool-card__chevron" aria-hidden="true">↗</span>
-          </button>
+          <img class="hero-bear" src="./assets/mascot/dr-bear-approved.png" alt="Dr. Bear giving a thumbs-up">
+        </section>
 
-          <button class="tool-card" type="button" data-tool="large">
-            <span class="tool-card__icon tool-card__icon--violet" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M5 4h10l4 4v12H5z"/><path d="M14 4v5h5M9 15h6M12 12v6"/></svg>
-            </span>
-            <span class="tool-card__copy"><strong data-i18n="largeFiles">Large Files</strong><small data-i18n="largeFilesBody">See what takes the most room in your selection.</small></span>
-            <span class="tool-card__chevron" aria-hidden="true">↗</span>
-          </button>
+        <button id="startCheckup" class="primary-scan" type="button">
+          <span class="primary-scan__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+          </span>
+          <span class="primary-scan__copy">
+            <strong data-i18n="startCheckup">Start Checkup</strong>
+            <small data-i18n="startCheckupBody">Choose files or a folder to analyze.</small>
+          </span>
+          <span class="primary-scan__go" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg>
+          </span>
+        </button>
 
-          <button class="tool-card" type="button" data-tool="older">
-            <span class="tool-card__icon tool-card__icon--amber" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>
-            </span>
-            <span class="tool-card__copy"><strong data-i18n="olderFiles">Older Files</strong><small data-i18n="olderFilesBody">Review files with older modified dates.</small></span>
-            <span class="tool-card__chevron" aria-hidden="true">↗</span>
-          </button>
-
-          <button class="tool-card" type="button" data-tool="cleanup">
-            <span class="tool-card__icon tool-card__icon--mint" aria-hidden="true">
+        <section class="quick-grid" aria-label="Quick tools">
+          <button class="quick-card" type="button" data-tool="cleanup">
+            <span class="quick-card__icon quick-card__icon--blue" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M4 6h16M9 6V4h6v2m-9 0 1 14h10l1-14M10 10v6M14 10v6"/></svg>
             </span>
-            <span class="tool-card__copy"><strong data-i18n="cleanupCandidates">Cleanup Candidates</strong><small data-i18n="cleanupCandidatesBody">Bring useful findings together in one review.</small></span>
-            <span class="tool-card__chevron" aria-hidden="true">↗</span>
+            <strong data-i18n="cleanupShort">Cleanup</strong>
+            <small data-i18n="cleanupHint">Review candidates</small>
           </button>
-        </div>
-      </section>
 
-      <section class="summary-card" aria-labelledby="summaryTitle">
-        <div class="summary-card__topline">
-          <div>
-            <span class="section-heading__kicker" data-i18n="summaryKicker">CHECKUP SUMMARY</span>
-            <h2 id="summaryTitle" data-i18n="summaryTitle">File Health</h2>
+          <button class="quick-card" type="button" data-tool="duplicates">
+            <span class="quick-card__icon quick-card__icon--violet" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="7" y="7" width="11" height="11" rx="2"/><path d="M15 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+            </span>
+            <strong data-i18n="duplicatesShort">Duplicates</strong>
+            <small data-i18n="duplicatesHint">Find repeats</small>
+          </button>
+
+          <button class="quick-card" type="button" data-tool="large">
+            <span class="quick-card__icon quick-card__icon--amber" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3.5 7.5h6l1.7 2H20a1 1 0 0 1 1 1V19H3V8.5a1 1 0 0 1 .5-1Z"/></svg>
+            </span>
+            <strong data-i18n="largeShort">Large Files</strong>
+            <small data-i18n="largeHint">Biggest files</small>
+          </button>
+
+          <button class="quick-card" type="button" data-tool="older">
+            <span class="quick-card__icon quick-card__icon--mint" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg>
+            </span>
+            <strong data-i18n="olderShort">Older Files</strong>
+            <small data-i18n="olderHint">Older edits</small>
+          </button>
+        </section>
+
+        <button class="health-card" type="button" data-tool="health">
+          <span class="health-card__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M20.8 5.8a5.3 5.3 0 0 0-7.5 0L12 7.1l-1.3-1.3a5.3 5.3 0 1 0-7.5 7.5L12 22l8.8-8.7a5.3 5.3 0 0 0 0-7.5Z"/></svg>
+          </span>
+          <span class="health-card__copy">
+            <strong data-i18n="healthTitle">File Health</strong>
+            <small data-i18n="healthBody">Your checkup summary will appear here.</small>
+          </span>
+          <span class="health-card__go" aria-hidden="true">›</span>
+        </button>
+
+        <section class="editorial-card" aria-label="Bearagnostic editorial note">
+          <img src="./assets/brand/home-editorial-still-life.webp" alt="A bright minimal desk with books and a green plant" loading="lazy">
+          <div class="editorial-card__wash" aria-hidden="true"></div>
+          <div class="editorial-card__quote">
+            <span class="quote-mark">“</span>
+            <blockquote data-i18n-html="editorialQuote">A cleaner file set<br>leaves more room to think.</blockquote>
+            <small>— Bearagnostic</small>
           </div>
-          <span class="summary-card__status" data-i18n="notYet">Not checked yet</span>
-        </div>
-        <div class="summary-card__empty">
-          <span class="summary-card__pulse" aria-hidden="true"><span></span></span>
-          <div>
-            <strong data-i18n="summaryEmptyTitle">No checkup yet</strong>
-            <p data-i18n="summaryEmptyBody">Choose files when you’re ready. Bearagnostic will show only results it can actually verify.</p>
-          </div>
-        </div>
-      </section>
+          <span class="editorial-card__note" data-i18n-html="editorialNote">Better files.<br>Brighter days.</span>
+        </section>
+      </main>
+    </div>
 
-      <section class="editorial-card" aria-label="Bearagnostic editorial note">
-        <img src="./assets/brand/home-editorial-still-life.webp" alt="A bright minimal desk with books and a green plant" loading="lazy">
-        <div class="editorial-card__shade" aria-hidden="true"></div>
-        <div class="editorial-card__copy">
-          <span data-i18n="editorialKicker">A NOTE FROM DR. BEAR</span>
-          <blockquote data-i18n="editorialQuote">Less clutter. More room to think.</blockquote>
-          <small>— Bearagnostic</small>
-        </div>
-      </section>
+    <nav class="bottom-nav" aria-label="Primary navigation">
+      <button class="nav-item is-active" type="button" data-nav="home">
+        <span class="nav-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 11 9-8 9 8v10h-6v-6H9v6H3z"/></svg></span>
+        <span data-i18n="navHome">Home</span>
+      </button>
+      <button class="nav-item" type="button" data-nav="checkup">
+        <span class="nav-item__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></span>
+        <span data-i18n="navCheckup">Checkup</span>
+      </button>
+      <button class="nav-item" type="button" data-nav="tools">
+        <span class="nav-item__icon" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg></span>
+        <span data-i18n="navTools">Tools</span>
+      </button>
+      <button class="nav-item" type="button" data-nav="insights">
+        <span class="nav-item__icon" aria-hidden="true"><path d="M5 20V11M10 20V5M15 20V14M20 20V8"/></svg></span>
+        <span data-i18n="navInsights">Insights</span>
+      </button>
+      <button class="nav-item" type="button" data-nav="more">
+        <span class="nav-item__icon nav-item__icon--dots" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg></span>
+        <span data-i18n="navMore">More</span>
+      </button>
+    </nav>
 
-      <footer class="app-footer">
-        <span>BENEDICT INTERACTIVE</span>
-        <span class="app-footer__dot">•</span>
-        <span>v<span id="appVersion">0.1.0</span></span>
-        <span class="app-footer__dot">•</span>
-        <span>Build <span id="buildNumber">1</span></span>
-      </footer>
-    </main>
+    <footer class="app-footer">
+      <span>BENEDICT INTERACTIVE</span>
+      <span>v<span id="appVersion">0.1.1</span> · B<span id="buildNumber">2</span></span>
+    </footer>
   </div>
 
   <div id="scrim" class="scrim" hidden></div>
@@ -179,33 +165,24 @@
   <section id="firstRunSheet" class="sheet" role="dialog" aria-modal="true" aria-labelledby="firstRunTitle" hidden>
     <div class="sheet__handle" aria-hidden="true"></div>
     <div class="sheet__content">
-      <div class="sheet__top-row">
+      <div class="sheet-brand-row">
         <div class="sheet-brand">
-          <img src="./assets/icons/app-icon-192.png" alt="" width="48" height="48">
-          <div><strong>Bearagnostic</strong><small data-i18n="installBadge">APP EXPERIENCE</small></div>
+          <img src="./assets/icons/app-icon-192.png" alt="" width="52" height="52">
+          <div><strong>Bearagnostic</strong><small data-i18n="appExperience">APP EXPERIENCE</small></div>
         </div>
-        <div class="language-pills language-pills--compact" data-language-group>
-          <button type="button" data-lang="en">EN</button>
-          <button type="button" data-lang="ja">日本語</button>
-          <button type="button" data-lang="th">ไทย</button>
-        </div>
+        <button class="sheet-close" type="button" data-close-sheet aria-label="Close">×</button>
       </div>
       <h2 id="firstRunTitle" data-i18n="installTitle">Keep Dr. Bear one tap away.</h2>
-      <p class="sheet__lead" data-i18n="installBody">Install Bearagnostic for a cleaner, full-screen app experience.</p>
-
+      <p class="sheet__lead" data-i18n="installBody">Install Bearagnostic for the cleanest full-screen experience.</p>
       <div class="trust-note">
-        <span class="trust-note__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.6 2.8 8 7 10 4.2-2 7-5.4 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
-        </span>
-        <div><strong data-i18n="scopeTitle">Your files. Your choice.</strong><p data-i18n="scopeBody">Selected files are analyzed locally by Bearagnostic and are not uploaded by the app in the current version.</p></div>
+        <span class="trust-note__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.6 2.8 8 7 10 4.2-2 7-5.4 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+        <div><strong data-i18n="scopeTitle">Your files. Your choice.</strong><p data-i18n="scopeBody">Selected files are analyzed locally and are not uploaded by the app in the current version.</p></div>
       </div>
-
       <div id="iosInstallGuide" class="install-guide" hidden>
         <div><span>1</span><p data-i18n="iosStep1">Tap Share in Safari.</p></div>
         <div><span>2</span><p data-i18n="iosStep2">Choose “Add to Home Screen”.</p></div>
         <div><span>3</span><p data-i18n="iosStep3">Tap Add, then open Bearagnostic from its icon.</p></div>
       </div>
-
       <div class="sheet__actions">
         <button id="installPrimary" class="primary-button" type="button" data-i18n="installButton">Install Bearagnostic</button>
         <button id="installLater" class="text-button" type="button" data-i18n="notNow">Not now</button>
@@ -213,60 +190,79 @@
     </div>
   </section>
 
-  <section id="languageSheet" class="sheet sheet--compact" role="dialog" aria-modal="true" aria-labelledby="languageTitle" hidden>
-    <div class="sheet__handle" aria-hidden="true"></div>
-    <div class="sheet__content">
-      <div class="sheet__heading-row"><div><span class="section-heading__kicker">LANGUAGE</span><h2 id="languageTitle" data-i18n="languageTitle">Choose language</h2></div><button class="sheet-close" data-close-sheet type="button" aria-label="Close">×</button></div>
-      <div class="language-list" data-language-group>
-        <button type="button" data-lang="en"><span>English</span><small>English</small><i>✓</i></button>
-        <button type="button" data-lang="ja"><span>日本語</span><small>Japanese</small><i>✓</i></button>
-        <button type="button" data-lang="th"><span>ไทย</span><small>Thai</small><i>✓</i></button>
-      </div>
-    </div>
-  </section>
-
   <section id="menuSheet" class="sheet sheet--compact" role="dialog" aria-modal="true" aria-labelledby="menuTitle" hidden>
     <div class="sheet__handle" aria-hidden="true"></div>
     <div class="sheet__content">
-      <div class="sheet__heading-row"><div><span class="section-heading__kicker">BEARAGNOSTIC</span><h2 id="menuTitle" data-i18n="menuTitle">App menu</h2></div><button class="sheet-close" data-close-sheet type="button" aria-label="Close">×</button></div>
-      <div class="menu-list">
-        <button id="menuLanguage" type="button"><span class="menu-list__icon"><svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0c2.2-2.3 3.4-5.4 3.4-9S14.2 5.3 12 3m0 18c-2.2-2.3-3.4-5.4-3.4-9S9.8 5.3 12 3M3.6 9h16.8M3.6 15h16.8"/></svg></span><span><strong data-i18n="languageMenu">Language</strong><small id="currentLanguageLabel">English</small></span><b>›</b></button>
-        <button id="menuInstall" type="button"><span class="menu-list__icon"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"/></svg></span><span><strong data-i18n="installMenu">Install app</strong><small data-i18n="installMenuBody">Add Bearagnostic to your device</small></span><b>›</b></button>
-        <button id="menuClose" class="menu-list__danger" type="button"><span class="menu-list__icon"><svg viewBox="0 0 24 24"><path d="M12 3v9M7.2 5.7a8 8 0 1 0 9.6 0"/></svg></span><span><strong data-i18n="closeApp">Close Bearagnostic</strong><small data-i18n="closeAppBody">End this app session</small></span><b>›</b></button>
+      <div class="sheet-heading-row">
+        <div><span class="sheet-kicker">BEARAGNOSTIC</span><h2 id="menuTitle" data-i18n="menuTitle">Settings</h2></div>
+        <button class="sheet-close" type="button" data-close-sheet aria-label="Close">×</button>
       </div>
-      <div class="menu-build">v<span id="menuVersion">0.1.0</span> · Build <span id="menuBuild">1</span></div>
+
+      <div class="menu-group">
+        <button id="languageRow" class="menu-row" type="button">
+          <span class="menu-row__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0c2.2-2.3 3.4-5.4 3.4-9S14.2 5.3 12 3m0 18c-2.2-2.3-3.4-5.4-3.4-9S9.8 5.3 12 3M3.6 9h16.8M3.6 15h16.8"/></svg></span>
+          <span class="menu-row__copy"><strong data-i18n="languageMenu">Language</strong><small id="currentLanguageLabel">English</small></span>
+          <span class="menu-row__arrow">›</span>
+        </button>
+        <button id="menuInstall" class="menu-row" type="button">
+          <span class="menu-row__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14"/></svg></span>
+          <span class="menu-row__copy"><strong data-i18n="installMenu">Install app</strong><small data-i18n="installMenuBody">Add Bearagnostic to your device</small></span>
+          <span class="menu-row__arrow">›</span>
+        </button>
+        <button id="closeAppButton" class="menu-row menu-row--danger" type="button">
+          <span class="menu-row__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 5H5v14h4M13 8l4 4-4 4M17 12H8"/></svg></span>
+          <span class="menu-row__copy"><strong data-i18n="closeApp">Close Bearagnostic</strong><small data-i18n="closeAppBody">End this app session</small></span>
+          <span class="menu-row__arrow">›</span>
+        </button>
+      </div>
+
+      <div class="menu-version">Bearagnostic v<span id="menuVersion">0.1.1</span> · Build <span id="menuBuild">2</span></div>
+    </div>
+  </section>
+
+  <section id="languageSheet" class="sheet sheet--compact" role="dialog" aria-modal="true" aria-labelledby="languageTitle" hidden>
+    <div class="sheet__handle" aria-hidden="true"></div>
+    <div class="sheet__content">
+      <div class="sheet-heading-row">
+        <div><span class="sheet-kicker">LANGUAGE</span><h2 id="languageTitle" data-i18n="languageTitle">Choose language</h2></div>
+        <button class="sheet-close" type="button" data-close-sheet aria-label="Close">×</button>
+      </div>
+      <div class="language-list" data-language-group>
+        <button type="button" data-lang="en"><span>English</span><i>EN</i></button>
+        <button type="button" data-lang="ja"><span>日本語</span><i>日本</i></button>
+        <button type="button" data-lang="th"><span>ไทย</span><i>TH</i></button>
+      </div>
     </div>
   </section>
 
   <section id="infoSheet" class="sheet sheet--compact" role="dialog" aria-modal="true" aria-labelledby="infoTitle" hidden>
     <div class="sheet__handle" aria-hidden="true"></div>
-    <div class="sheet__content">
-      <div class="info-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"/><path d="M12 10v6M12 7h.01"/></svg></div>
-      <h2 id="infoTitle" data-i18n="foundationTitle">Checkup is being connected.</h2>
-      <p class="sheet__lead" id="infoBody" data-i18n="foundationBody">Build 1 establishes the premium app shell and Home experience. Real file analysis follows in the checkup core.</p>
-      <button class="primary-button" data-close-sheet type="button" data-i18n="gotIt">Got it</button>
+    <div class="sheet__content sheet__content--center">
+      <img class="info-bear" src="./assets/mascot/dr-bear-scanning.png" alt="Dr. Bear analyzing files">
+      <h2 id="infoTitle" data-i18n="foundationTitle">Checkup core is next.</h2>
+      <p class="sheet__lead" data-i18n="foundationBody">This build locks the approved Home experience. Real selected-file analysis is the next production layer.</p>
+      <button class="primary-button" type="button" data-close-sheet data-i18n="gotIt">Got it</button>
     </div>
   </section>
 
   <section id="closeSheet" class="sheet sheet--compact" role="dialog" aria-modal="true" aria-labelledby="closeTitle" hidden>
     <div class="sheet__handle" aria-hidden="true"></div>
-    <div class="sheet__content">
-      <div class="close-mark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v9M7.2 5.7a8 8 0 1 0 9.6 0"/></svg></div>
+    <div class="sheet__content sheet__content--center">
+      <div class="close-symbol" aria-hidden="true">×</div>
       <h2 id="closeTitle" data-i18n="closeConfirmTitle">Close Bearagnostic?</h2>
       <p class="sheet__lead" data-i18n="closeConfirmBody">Your current app session will end.</p>
-      <div class="sheet__actions sheet__actions--horizontal">
-        <button id="cancelClose" class="secondary-button" type="button" data-i18n="cancel">Cancel</button>
-        <button id="confirmClose" class="danger-button" type="button" data-i18n="close">Close</button>
+      <div class="confirm-actions">
+        <button class="secondary-button" type="button" data-close-sheet data-i18n="cancel">Cancel</button>
+        <button id="confirmCloseApp" class="danger-button" type="button" data-i18n="close">Close</button>
       </div>
     </div>
   </section>
 
-  <section id="exitState" class="exit-state" aria-live="polite" hidden>
-    <img src="./assets/icons/app-icon-192.png" alt="" width="84" height="84">
-    <span class="section-heading__kicker">BEARAGNOSTIC</span>
-    <h2 data-i18n="exitTitle">Ready to close.</h2>
-    <p data-i18n="exitBody">Your browser does not allow a web app to close itself here. You can now swipe this app away from your recent apps.</p>
-    <button id="returnToApp" class="secondary-button" type="button" data-i18n="returnApp">Return to app</button>
+  <section id="exitState" class="exit-state" hidden>
+    <img src="./assets/icons/app-icon-192.png" alt="" width="82" height="82">
+    <h1 data-i18n="exitTitle">Ready to close.</h1>
+    <p data-i18n="exitBody">This environment does not allow a web app to close itself. Swipe Bearagnostic away from your recent apps.</p>
+    <button id="returnToApp" class="primary-button" type="button" data-i18n="returnApp">Return to app</button>
   </section>
 
   <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
