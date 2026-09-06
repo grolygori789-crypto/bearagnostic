@@ -1,8 +1,9 @@
 window.BEARAGNOSTIC_CONFIG = Object.freeze({
   appName: 'Bearagnostic',
-  appVersion: '0.1.1',
-  build: 2,
+  appVersion: '0.1.2',
+  build: 3,
   legalVersion: null,
   storagePrefix: 'bearagnostic.',
-  supportEmail: 'benedict.support@gmail.com'
+  supportEmail: 'benedict.support@gmail.com',
+  koFiUrl: 'https://ko-fi.com/benedictinteractive'
 });

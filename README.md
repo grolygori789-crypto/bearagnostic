@@ -1,44 +1,39 @@
 # Bearagnostic
 
-**Premium local-first file health checkups, by Benedict Interactive.**
+**Premium local-first file-health checkups, by Benedict Interactive.**
 
-Bearagnostic is a mobile-first Progressive Web App (PWA) centered on Dr. Bear: a calm, competent file-health assistant that analyzes only the files or folders a user explicitly chooses.
+Bearagnostic is a mobile-first Progressive Web App centered on Dr. Bear, a calm, competent and slightly deadpan file-health assistant. It analyzes only files or folders the user explicitly chooses.
 
-## Product principles
+## Current production candidate
 
-- Local-first analysis with no selected-file upload in the current product direction.
-- Honest browser/PWA capability claims; no fake whole-device scan, RAM/CPU cleaner, antivirus, or fabricated diagnostics.
-- Premium Clean Clinical Editorial design with the approved Dr. Bear identity.
-- Approved Home mockup is the production composition authority, not a loose inspiration reference.
-- Simple, robust architecture: semantic HTML, modern CSS, vanilla JavaScript, browser-native APIs, service worker, and web manifest.
-- Mobile-first responsive behavior across common Android and iPhone viewport sizes, with portrait-first installed-PWA behavior.
-- Native-quality copy in English, Japanese, and Thai.
-- Stable canonical file paths and an overwrite-first update policy.
+- App Version: **0.1.2**
+- Runtime Build: **3**
+- Service Worker cache: **bearagnostic-app-b3**
+- Languages: **English / 日本語 / ไทย**
 
-## Current repository state
+Build 3 is a focused visual and shell correction release. It restores the approved Premium Clean Clinical Editorial Home composition, adds the Benedict Interactive → Bearagnostic opening, fixes the PWA install offer flow, provides complete bottom-navigation iconography, keeps Home fitted to the viewport without page scrolling, and introduces real Settings / More information architecture rather than routing those controls to installation.
 
-This repository contains the **Build 2 visual-fidelity runtime candidate**.
+## Product truth
 
-- App Version: **0.1.1**
-- Runtime Build: **2**
-- Service-worker cache: **`bearagnostic-app-b2`**
-- Build 2 rebuilds the Home implementation around the approved mockup composition: open hero, large Dr. Bear anchor, blue primary Checkup panel, four compact tools, File Health card, editorial lifestyle card, persistent bottom navigation, and Benedict Interactive footer.
-- Bottom navigation/footer live outside the scrolling content area, so they cannot be pushed off-screen by Home content.
-- Real file-analysis logic remains intentionally deferred to the Checkup Core; the shell does not fabricate results.
+Bearagnostic does not claim unrestricted whole-device access. The V1 direction is user-selected file analysis for duplicates, large files, older files and cleanup candidates. Selected files are intended to be analyzed locally and are not uploaded by the app in the current version.
 
-## Canonical documents
+The real file-analysis Checkup engine is a subsequent production phase. Build 3 does not fabricate scan results, health scores, RAM/CPU data, system junk or progress.
 
-- `docs/governance/BEARAGNOSTIC_MASTER_PLAN.md` — implementation roadmap and visual-fidelity acceptance rule.
-- `docs/governance/ROOM_MIGRATION_PROMPT.md` — room operating contract and project handoff.
-- `docs/governance/REPOSITORY_STRUCTURE_POLICY.md` — repository cleanliness and update rules.
-- `docs/qa/QA_MATRIX.md` — release QA baseline.
-- `docs/releases/RELEASE_PROCESS.md` — Build, packaging, and delivery workflow.
+## PWA behavior
+
+- Installable from supported browsers.
+- Custom first-browser-launch install invitation with native prompt integration where the browser exposes it.
+- iOS guidance for Add to Home Screen.
+- Installed launch targets full-screen with standalone/minimal-ui fallbacks.
+- Portrait-first layout and best-effort orientation lock.
+- Zoom suppression at the web-app layer; OS accessibility behavior may override browser restrictions.
+- Offline app shell via Service Worker.
 
 ## Repository philosophy
 
-> Stable paths. Surgical changes. Overwrite first. Archive only when it protects a known-good baseline.
+> Stable paths. Surgical changes. Overwrite first. Git history keeps ordinary history.
 
-Runtime files should not be duplicated as `v2`, `final`, `new`, or dated copies. Existing canonical files are updated in place whenever their responsibility remains the same.
+Runtime files should not be duplicated as `v2`, `final`, `new`, or dated copies. Delivery packages use repository-relative paths so they can be overlaid directly onto the repository root.
 
 ## Ownership
 

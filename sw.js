@@ -1,23 +1,24 @@
-const BUILD = 2;
+const BUILD = 3;
 const CACHE_NAME = `bearagnostic-app-b${BUILD}`;
 const APP_SHELL = [
   './',
   './index.html',
-  './css/app.css',
-  './js/config/app-config.js',
-  './js/config/i18n.js',
-  './js/core/app.js',
-  './manifest.webmanifest',
-  './assets/brand/bearagnostic-wordmark.png',
-  './assets/brand/home-editorial-still-life.webp',
+  './css/app.css?v=3',
+  './js/config/app-config.js?v=3',
+  './js/config/i18n.js?v=3',
+  './js/core/app.js?v=3',
+  './manifest.webmanifest?v=3',
   './assets/icons/app-icon-192.png',
   './assets/icons/app-icon-512.png',
   './assets/icons/app-icon-maskable-192.png',
   './assets/icons/app-icon-maskable-512.png',
-  './assets/icons/apple-touch-icon.png',
-  './assets/icons/favicon-32.png',
+  './assets/icons/apple-touch-icon.png?v=3',
+  './assets/icons/favicon-32.png?v=3',
   './assets/mascot/dr-bear-approved.png',
-  './assets/mascot/dr-bear-scanning.png'
+  './assets/mascot/dr-bear-scanning.png',
+  './assets/mascot/dr-bear-concerned.png',
+  './assets/mascot/dr-bear-warning.png',
+  './assets/brand/home-editorial-still-life.webp'
 ];
 
 self.addEventListener('install', (event) => {
@@ -28,11 +29,9 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(
-        keys
-          .filter((key) => key.startsWith('bearagnostic-app-b') && key !== CACHE_NAME)
-          .map((key) => caches.delete(key))
-      ))
+      .then((keys) => Promise.all(keys
+        .filter((key) => key.startsWith('bearagnostic-app-b') && key !== CACHE_NAME)
+        .map((key) => caches.delete(key))))
       .then(() => self.clients.claim())
   );
 });
@@ -48,8 +47,10 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       fetch(request)
         .then((response) => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put('./index.html', copy));
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put('./index.html', copy));
+          }
           return response;
         })
         .catch(() => caches.match('./index.html'))
@@ -61,9 +62,13 @@ self.addEventListener('fetch', (event) => {
     caches.match(request).then((cached) => {
       if (cached) return cached;
       return fetch(request).then((response) => {
-        if (!response || response.status !== 200 || response.type === 'opaque') return response;
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+        if (!response || !response.ok || response.type === 'opaque') return response;
+        const requestHref = new URL(request.url).href;
+        const isShellAsset = APP_SHELL.some((entry) => new URL(entry, self.registration.scope).href === requestHref);
+        if (isShellAsset) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+        }
         return response;
       });
     })
