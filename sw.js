@@ -1,24 +1,24 @@
-const BUILD = 9;
+const BUILD = 10;
 const CACHE_NAME = `bearagnostic-app-b${BUILD}`;
 const SUPPORT_CACHE = `bearagnostic-support-b${BUILD}`;
 const PROMPTPAY_QR_URL = 'https://raw.githubusercontent.com/grolygori789-crypto/little-ganesha-tarot/main/assets/support/promptpay-qr.png';
 const APP_SHELL = [
   './',
   './index.html',
-  './css/app.css?v=9',
-  './css/experience.css?v=9',
-  './js/config/app-config.js?v=9',
-  './js/config/i18n.js?v=9',
-  './js/core/app.js?v=9',
-  './js/support/help-feedback.js?v=9',
-  './js/support/voluntary-support.js?v=9',
-  './manifest.webmanifest?v=9',
+  './css/app.css?v=10',
+  './css/experience.css?v=10',
+  './js/config/app-config.js?v=10',
+  './js/config/i18n.js?v=10',
+  './js/core/app.js?v=10',
+  './js/support/help-feedback.js?v=10',
+  './js/support/voluntary-support.js?v=10',
+  './manifest.webmanifest?v=10',
   './assets/icons/app-icon-192.png',
   './assets/icons/app-icon-512.png',
   './assets/icons/app-icon-maskable-192.png',
   './assets/icons/app-icon-maskable-512.png',
-  './assets/icons/apple-touch-icon.png?v=9',
-  './assets/icons/favicon-32.png?v=9',
+  './assets/icons/apple-touch-icon.png?v=10',
+  './assets/icons/favicon-32.png?v=10',
   './assets/mascot/dr-bear-approved.png',
   './assets/mascot/dr-bear-scanning.png',
   './assets/mascot/dr-bear-concerned.png',
@@ -34,6 +34,7 @@ const APP_SHELL = [
   './assets/ui/glass-icons/insights.webp',
   './assets/ui/glass-icons/more.webp',
   './assets/ui/glass-icons/preferences.webp',
+  './assets/ui/plain-icons/header-gear-silver.png',
 ];
 
 self.addEventListener('install', (event) => {
