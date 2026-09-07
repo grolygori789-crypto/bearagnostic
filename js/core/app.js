@@ -4,7 +4,7 @@
   const CONFIG = window.BEARAGNOSTIC_CONFIG || {};
   const COPY = window.BEARAGNOSTIC_I18N || {};
   const STORAGE = CONFIG.storagePrefix || 'bearagnostic.';
-  const BUILD = Number(CONFIG.build || 7);
+  const BUILD = Number(CONFIG.build || 8);
   const FIRST_LAUNCH_KEY = `${STORAGE}launch.seen.b${BUILD}`;
   const INSTALL_DISMISSED_KEY = `${STORAGE}install.dismissed.b${BUILD}`;
   const LANG_KEY = `${STORAGE}language`;
@@ -138,7 +138,7 @@
     if (kind === 'about') {
       byId('infoKicker').textContent = t('aboutKicker');
       byId('infoTitle').textContent = t('aboutTitle');
-      byId('infoContent').innerHTML = `<div class="about-sheet-brand"><img src="./assets/icons/app-icon-192.png" alt="" width="58" height="58"><div><strong>Bearagnostic</strong><span>v${escapeHTML(CONFIG.appVersion || '0.1.6')} · Build ${BUILD}</span><span>Benedict Interactive · Bangkok, Thailand</span></div></div><p>${escapeHTML(t('aboutPrivacyNote'))}</p>`;
+      byId('infoContent').innerHTML = `<div class="about-sheet-brand"><img src="./assets/icons/app-icon-192.png" alt="" width="58" height="58"><div><strong>Bearagnostic</strong><span>v${escapeHTML(CONFIG.appVersion || '0.1.7')} · Build ${BUILD}</span><span>Benedict Interactive · Bangkok, Thailand</span></div></div><p>${escapeHTML(t('aboutPrivacyNote'))}</p>`;
       openSheet(infoSheet, byId('closeInfo'));
       return;
     }
@@ -246,7 +246,7 @@
     const supportsDirectory = 'showDirectoryPicker' in window || 'webkitdirectory' in document.createElement('input');
     const supportsFSAccess = 'showOpenFilePicker' in window;
     return [
-      `App: Bearagnostic`, `Version: ${CONFIG.appVersion || '0.1.6'}`, `Build: ${BUILD}`, `Language: ${currentLanguage}`,
+      `App: Bearagnostic`, `Version: ${CONFIG.appVersion || '0.1.7'}`, `Build: ${BUILD}`, `Language: ${currentLanguage}`,
       `Platform: ${detectPlatform()}`, `Browser: ${detectBrowser()}`, `Environment: ${isStandalone() ? 'Installed PWA' : 'Browser'}`,
       `Screen: ${currentScreen}`, `Viewport: ${Math.round(innerWidth)}×${Math.round(innerHeight)}`,
       `File System Access API: ${supportsFSAccess ? 'yes' : 'no'}`, `Directory selection: ${supportsDirectory ? 'yes' : 'no'}`,
@@ -312,7 +312,7 @@
 
   function registerServiceWorker() {
     if (!('serviceWorker' in navigator)) return;
-    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=7',{scope:'./'}).catch(()=>{}), { once:true });
+    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=8',{scope:'./'}).catch(()=>{}), { once:true });
   }
   function boot() {
     currentLanguage=detectLanguage(); applyLanguage(currentLanguage,{persist:false}); setMotionMode(storageGet(MOTION_KEY,'system'));

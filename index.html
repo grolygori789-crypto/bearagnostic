@@ -11,14 +11,14 @@
   <meta name="apple-mobile-web-app-title" content="Bearagnostic">
   <meta name="format-detection" content="telephone=no">
   <meta name="description" content="Bearagnostic is a premium, local-first file-health checkup assistant by Benedict Interactive.">
-  <meta name="application-version" content="0.1.6">
+  <meta name="application-version" content="0.1.7">
   <title>Bearagnostic</title>
-  <link rel="manifest" href="./manifest.webmanifest?v=7">
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=7">
-  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png?v=7">
+  <link rel="manifest" href="./manifest.webmanifest?v=8">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=8">
+  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png?v=8">
   <link rel="preload" as="image" href="./assets/mascot/dr-bear-approved.png">
-  <link rel="stylesheet" href="./css/app.css?v=7">
-  <link rel="stylesheet" href="./css/experience.css?v=7">
+  <link rel="stylesheet" href="./css/app.css?v=8">
+  <link rel="stylesheet" href="./css/experience.css?v=8">
 </head>
 <body data-build="6">
   <div id="orientationGuard" class="orientation-guard" role="alert" aria-live="assertive" hidden>
@@ -56,7 +56,7 @@
           <small><b data-i18n="brandFileHealth">FILE HEALTH</b><i></i><b data-i18n="brandBrighterDays">BRIGHTER DAYS</b></small>
         </span>
       </button>
-      <button class="header-settings" id="settingsButton" type="button" data-i18n-aria="preferences" aria-label="Preferences"><img class="header-glass-icon" src="./assets/ui/glass-icons/preferences.webp" alt="" aria-hidden="true"></button>
+      <button class="header-settings header-settings--plain" id="settingsButton" type="button" data-i18n-aria="preferences" aria-label="Preferences"><span class="header-settings__disc" aria-hidden="true"><svg class="header-plain-gear" viewBox="0 0 24 24"><path d="M12 8.2a3.8 3.8 0 1 0 0 7.6 3.8 3.8 0 0 0 0-7.6Zm8.1 4.6-.02-.8 1.56-1.22a.9.9 0 0 0 .24-1.15l-1.48-2.56a.9.9 0 0 0-1.08-.4l-1.92.77a7.9 7.9 0 0 0-.7-.4l-.3-2.05a.9.9 0 0 0-.9-.75h-2.96a.9.9 0 0 0-.9.75l-.3 2.05c-.24.12-.47.25-.7.4l-1.92-.77a.9.9 0 0 0-1.08.4L2.1 9.69a.9.9 0 0 0 .24 1.15L3.9 12l-.02.8-1.56 1.22a.9.9 0 0 0-.24 1.15l1.48 2.56a.9.9 0 0 0 1.08.4l1.92-.77c.22.15.46.28.7.4l.3 2.05a.9.9 0 0 0 .9.75h2.96a.9.9 0 0 0 .9-.75l.3-2.05c.24-.12.47-.25.7-.4l1.92.77a.9.9 0 0 0 1.08-.4l1.48-2.56a.9.9 0 0 0-.24-1.15L20.1 12.8Z"/></svg></span></button>
     </header>
 
     <main class="app-main" id="appMain">
@@ -132,7 +132,7 @@
           <button class="setting-link" id="privacyHubRow" type="button"><span class="soft-icon mint"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.7 2.8 8 7 10 4.2-2 7-5.3 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg></span><span><strong data-i18n="privacyLocal">Privacy & local data</strong><small data-i18n="privacyLocalSub">What stays on your device</small></span><b>›</b></button>
           <button class="setting-link" id="helpFeedbackHub" type="button"><span class="soft-icon violet"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9.7 9.5a2.5 2.5 0 1 1 4.4 1.6c-1.3 1.2-2.1 1.5-2.1 3"/><path d="M12 17h.01"/></svg></span><span><strong data-i18n="helpFeedback">Help & Feedback</strong><small data-i18n="helpFeedbackSub">Report a problem or send feedback</small></span><b>›</b></button>
           <button class="setting-link" id="supportProjectRow" type="button"><span class="soft-icon mint"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg></span><span><strong id="supportProjectTitle">Support Bearagnostic</strong><small id="supportProjectSub">Thailand via PromptPay · worldwide via Ko-fi</small></span><b>›</b></button>
-          <button class="setting-link" type="button" data-open="about"><span class="soft-icon amber"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 10v6"/><path d="M12 7h.01"/></svg></span><span><strong data-i18n="aboutBearagnostic">About Bearagnostic</strong><small>Benedict Interactive · v0.1.6 · Build 7</small></span><b>›</b></button>
+          <button class="setting-link" type="button" data-open="about"><span class="soft-icon amber"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 10v6"/><path d="M12 7h.01"/></svg></span><span><strong data-i18n="aboutBearagnostic">About Bearagnostic</strong><small>Benedict Interactive · v0.1.7 · Build 8</small></span><b>›</b></button>
           <button class="setting-link setting-link--close" type="button" data-close-app><span class="soft-icon red"><svg viewBox="0 0 24 24"><path d="M12 3v9"/><path d="M7 5.8a8 8 0 1 0 10 0"/></svg></span><span><strong data-i18n="closeBearagnostic">Close Bearagnostic</strong><small data-i18n="closeBearagnosticSub">End this app session</small></span><b>›</b></button>
         </div>
       </section>
@@ -171,7 +171,7 @@
       <button class="nav-button" type="button" data-nav="more"><img class="nav-glass-icon" src="./assets/ui/glass-icons/more.webp" alt="" aria-hidden="true"><span data-i18n="navMore">More</span></button>
     </nav>
 
-    <footer class="app-footer"><span class="app-footer__studio">BENEDICT INTERACTIVE</span><span class="app-footer__build">v0.1.6 · B7</span></footer>
+    <footer class="app-footer"><span class="app-footer__studio">BENEDICT INTERACTIVE</span><span class="app-footer__build">v0.1.7 · B8</span></footer>
   </div>
 
   <div class="modal-scrim" id="modalScrim" hidden></div>
@@ -198,10 +198,10 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <script src="./js/config/app-config.js?v=7"></script>
-  <script src="./js/config/i18n.js?v=7"></script>
-  <script src="./js/core/app.js?v=7"></script>
-  <script src="./js/support/help-feedback.js?v=7"></script>
-  <script src="./js/support/voluntary-support.js?v=7"></script>
+  <script src="./js/config/app-config.js?v=8"></script>
+  <script src="./js/config/i18n.js?v=8"></script>
+  <script src="./js/core/app.js?v=8"></script>
+  <script src="./js/support/help-feedback.js?v=8"></script>
+  <script src="./js/support/voluntary-support.js?v=8"></script>
 </body>
 </html>
