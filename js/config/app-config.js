@@ -1,6 +1,6 @@
 window.BEARAGNOSTIC_CONFIG = Object.freeze({
   appName: 'Bearagnostic',
-  appVersion: '0.1.5',
+  appVersion: '0.1.6',
   build: 6,
   legalVersion: null,
   storagePrefix: 'bearagnostic.',

@@ -1,34 +1,37 @@
-/* Bearagnostic Build 6 — luxury glass icon system + refined information architecture */
+/* Bearagnostic Build 7 — hero typography refinement + luxury glass icon system */
 
 /* Home hero: preserve the approved mockup composition without text/mascot collision. */
 .home-hero__copy{
-  left:clamp(4px,1.2vw,7px);
-  top:clamp(39%,6.2dvh,44%);
-  width:44%;
+  left:clamp(4px,1.15vw,7px);
+  top:clamp(38.6%,6.05dvh,43.4%);
+  width:43.2%;
 }
 .home-hero h1{
   font-family:"Iowan Old Style",Baskerville,"Palatino Linotype","Book Antiqua",Georgia,"Times New Roman",serif;
-  font-size:clamp(17px,4.75vw,21px);
-  line-height:1.13;
-  letter-spacing:-.026em;
+  font-size:clamp(16.5px,4.55vw,20px);
+  line-height:1.16;
+  letter-spacing:-.028em;
   font-weight:400;
 }
 .home-hero h1 em{white-space:nowrap}
+.home-hero h1 br+em{position:relative;top:.09em}
 .home-hero__bear{
-  right:clamp(-31px,-6.8vw,-17px);
+  right:clamp(-30px,-6.55vw,-16px);
   bottom:clamp(-15px,-1.9dvh,-7px);
-  width:clamp(202px,60vw,286px);
+  width:clamp(202px,59vw,284px);
   max-height:111%;
 }
 @media (max-width:350px){
-  .home-hero__copy{width:45%;top:41%}
-  .home-hero h1{font-size:clamp(15px,4.65vw,17px)}
-  .home-hero__bear{right:-26px;width:59vw}
+  .home-hero__copy{width:43.8%;top:40.4%}
+  .home-hero h1{font-size:clamp(14.8px,4.42vw,16.6px)}
+  .home-hero h1 br+em{position:relative;top:.10em}
+  .home-hero__bear{right:-24px;width:58vw}
 }
 @media (max-height:680px){
-  .home-hero__copy{top:40%;width:43%}
-  .home-hero h1{font-size:clamp(14px,4.45vw,17px);line-height:1.08}
-  .home-hero__bear{width:56vw;right:-18px;bottom:-8px}
+  .home-hero__copy{top:39.5%;width:42.1%}
+  .home-hero h1{font-size:clamp(13.8px,4.18vw,16.2px);line-height:1.12}
+  .home-hero h1 br+em{position:relative;top:.10em}
+  .home-hero__bear{width:55.5vw;right:-16px;bottom:-8px}
 }
 
 /* Preferences and privacy architecture */
