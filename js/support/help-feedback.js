@@ -102,7 +102,7 @@
   }
   function sendMail(){
     const {msg,body}=buildBody(); const t=c(); if(!msg){ api().showToast?.(t.required); return; }
-    const build=api().config?.build || 5;
+    const build=api().config?.build || 6;
     const subject=type==='report'?`Bearagnostic Build ${build} — Problem report`:`Bearagnostic Build ${build} — Feedback`;
     const href=`mailto:${encodeURIComponent(SUPPORT_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href=href;
