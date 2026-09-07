@@ -85,13 +85,14 @@
   }
 
   function localizeStatic(){
-    const t=c(); const map={supportGroupTitle:t.group,supportGroupNote:t.groupNote,supportProjectTitle:t.project,supportProjectSub:t.projectSub,promptPayBadge:t.thaiBadge,promptPayTitle:t.thaiTitle,promptPaySub:t.thaiSub,kofiBadge:t.worldBadge,kofiTitle:t.worldTitle,kofiSub:t.worldSub};
-    Object.entries(map).forEach(([id,text])=>{const el=document.getElementById(id);if(el)el.textContent=text;});
+    const t=c();
+    const title=document.getElementById('supportProjectTitle');
+    const sub=document.getElementById('supportProjectSub');
+    if(title) title.textContent=t.project;
+    if(sub) sub.textContent=t.projectSub;
   }
   function bind(){
     document.getElementById('supportProjectRow')?.addEventListener('click',renderHub);
-    document.getElementById('promptPaySupportButton')?.addEventListener('click',renderPromptPay);
-    document.getElementById('kofiSupportButton')?.addEventListener('click',renderKofi);
     localizeStatic();
   }
 

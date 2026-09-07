@@ -4,7 +4,7 @@
   const CONFIG = window.BEARAGNOSTIC_CONFIG || {};
   const COPY = window.BEARAGNOSTIC_I18N || {};
   const STORAGE = CONFIG.storagePrefix || 'bearagnostic.';
-  const BUILD = Number(CONFIG.build || 4);
+  const BUILD = Number(CONFIG.build || 5);
   const FIRST_LAUNCH_KEY = `${STORAGE}launch.seen.b${BUILD}`;
   const INSTALL_DISMISSED_KEY = `${STORAGE}install.dismissed.b${BUILD}`;
   const LANG_KEY = `${STORAGE}language`;
@@ -30,6 +30,8 @@
   let currentLanguage = 'en';
   let deferredInstallPrompt = null;
   let currentScreen = 'home';
+  let navContext = 'home';
+  let preferencesReturnScreen = 'home';
   let infoReturnFocus = null;
   let confirmAction = null;
   let installOfferTimer = null;
@@ -133,12 +135,18 @@
   }
   function escapeHTML(value) { return String(value).replace(/[&<>'"]/g, (ch) => ({ '&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;' }[ch])); }
   function openInfo(kind) {
-    const map = { privacy:['privacyKicker','privacyTitle','privacyBodyHtml'], about:['aboutKicker','aboutTitle','aboutBodyHtml'], tool:[null,'toolComingTitle','toolComingBody'] };
-    const [kickerKey,titleKey,bodyKey] = map[kind] || map.about;
+    if (kind === 'about') {
+      byId('infoKicker').textContent = t('aboutKicker');
+      byId('infoTitle').textContent = t('aboutTitle');
+      byId('infoContent').innerHTML = `<div class="about-sheet-brand"><img src="./assets/icons/app-icon-192.png" alt="" width="58" height="58"><div><strong>Bearagnostic</strong><span>v${escapeHTML(CONFIG.appVersion || '0.1.4')} · Build ${BUILD}</span><span>Benedict Interactive · Bangkok, Thailand</span></div></div><p>${escapeHTML(t('aboutPrivacyNote'))}</p>`;
+      openSheet(infoSheet, byId('closeInfo'));
+      return;
+    }
+    const map = { tool:[null,'toolComingTitle','toolComingBody'] };
+    const [kickerKey,titleKey,bodyKey] = map[kind] || map.tool;
     byId('infoKicker').textContent = kickerKey ? t(kickerKey) : 'BEARAGNOSTIC';
     byId('infoTitle').textContent = t(titleKey);
-    const content = t(bodyKey);
-    byId('infoContent').innerHTML = bodyKey.endsWith('Html') ? content : `<p>${escapeHTML(content)}</p>`;
+    byId('infoContent').innerHTML = `<p>${escapeHTML(t(bodyKey))}</p>`;
     openSheet(infoSheet, byId('closeInfo'));
   }
   function openConfirm({ title, body, primary, action, danger = false }) {
@@ -151,12 +159,19 @@
     clearTimeout(showToast.timer); showToast.timer = setTimeout(() => { toast.classList.remove('is-visible'); setTimeout(() => { toast.hidden = true; }, 180); }, duration);
   }
 
-  function switchScreen(name) {
+  function switchScreen(name, { preserveNav = false } = {}) {
     const target = $(`[data-screen="${CSS.escape(name)}"]`); if (!target) return;
     $$('.screen').forEach((screen) => { const active = screen === target; screen.hidden = !active; screen.classList.toggle('is-active', active); });
+
+    const primaryTabs = new Set(['home','checkup','tools','insights','more']);
+    if (primaryTabs.has(name)) navContext = name;
+    else if (name === 'privacy') navContext = 'more';
+    else if (!preserveNav && name !== 'preferences') navContext = 'home';
+
     $$('.nav-button[data-nav]').forEach((button) => {
-      const active = button.dataset.nav === name || (name === 'settings' && button.dataset.nav === 'more');
-      button.classList.toggle('is-active', active); active ? button.setAttribute('aria-current','page') : button.removeAttribute('aria-current');
+      const active = button.dataset.nav === navContext;
+      button.classList.toggle('is-active', active);
+      active ? button.setAttribute('aria-current','page') : button.removeAttribute('aria-current');
     });
     currentScreen = name;
     window.dispatchEvent(new CustomEvent('bearagnostic:screenchange', { detail: { screen: name } }));
@@ -231,7 +246,7 @@
     const supportsDirectory = 'showDirectoryPicker' in window || 'webkitdirectory' in document.createElement('input');
     const supportsFSAccess = 'showOpenFilePicker' in window;
     return [
-      `App: Bearagnostic`, `Version: ${CONFIG.appVersion || '0.1.3'}`, `Build: ${BUILD}`, `Language: ${currentLanguage}`,
+      `App: Bearagnostic`, `Version: ${CONFIG.appVersion || '0.1.4'}`, `Build: ${BUILD}`, `Language: ${currentLanguage}`,
       `Platform: ${detectPlatform()}`, `Browser: ${detectBrowser()}`, `Environment: ${isStandalone() ? 'Installed PWA' : 'Browser'}`,
       `Screen: ${currentScreen}`, `Viewport: ${Math.round(innerWidth)}×${Math.round(innerHeight)}`,
       `File System Access API: ${supportsFSAccess ? 'yes' : 'no'}`, `Directory selection: ${supportsDirectory ? 'yes' : 'no'}`,
@@ -255,10 +270,15 @@
     window.addEventListener('appinstalled', () => { deferredInstallPrompt = null; storageSet(INSTALL_DISMISSED_KEY,'1'); closeAllSheets(); syncFullscreenToggle(); });
 
     byId('homeBrandButton')?.addEventListener('click', () => switchScreen('home'));
-    byId('settingsButton')?.addEventListener('click', () => switchScreen('settings'));
-    byId('settingsBack')?.addEventListener('click', () => switchScreen('more'));
+    byId('settingsButton')?.addEventListener('click', () => {
+      preferencesReturnScreen = currentScreen === 'preferences' ? 'home' : currentScreen;
+      switchScreen('preferences', { preserveNav:true });
+    });
+    byId('preferencesBack')?.addEventListener('click', () => switchScreen(preferencesReturnScreen || 'home'));
+    byId('privacyHubRow')?.addEventListener('click', () => switchScreen('privacy'));
+    byId('privacyBack')?.addEventListener('click', () => switchScreen('more'));
     $$('.nav-button[data-nav]').forEach((button) => button.addEventListener('click', () => switchScreen(button.dataset.nav)));
-    $$('[data-open]').forEach((button) => button.addEventListener('click', () => { const kind=button.dataset.open; if (kind==='settings') switchScreen('settings'); else openInfo(kind); }));
+    $$('[data-open]').forEach((button) => button.addEventListener('click', () => openInfo(button.dataset.open)));
     $$('[data-tool]').forEach((button) => button.addEventListener('click', () => openInfo('tool')));
     byId('startCheckup')?.addEventListener('click', () => switchScreen('checkup'));
     byId('healthCard')?.addEventListener('click', () => switchScreen('checkup'));
@@ -268,9 +288,6 @@
     byId('fullscreenToggle')?.addEventListener('change', (event) => { storageSet(FULLSCREEN_KEY,event.target.checked?'true':'false'); if (event.target.checked) requestBrowserFullscreen(); });
 
     byId('clearLocalData')?.addEventListener('click', () => openConfirm({ title:t('clearConfirmTitle'), body:t('clearConfirmBody'), primary:t('clearConfirmButton'), danger:true, action:() => { storageRemoveByPrefix(); applyLanguage(detectLanguage(),{persist:true}); setMotionMode('system'); syncFullscreenToggle(); showToast(t('clearedToast')); } }));
-    byId('copyDiagnostics')?.addEventListener('click', copyDiagnostics);
-    byId('reportProblem')?.addEventListener('click', () => window.BearagnosticHelp?.openComposer?.('report'));
-    byId('sendFeedback')?.addEventListener('click', () => window.BearagnosticHelp?.openComposer?.('feedback'));
     byId('helpFeedbackHub')?.addEventListener('click', () => window.BearagnosticHelp?.openHub?.());
 
     $$('[data-close-app]').forEach((button) => button.addEventListener('click', () => openConfirm({ title:t('closeConfirmTitle'), body:t('closeConfirmBody'), primary:t('closeConfirmButton'), danger:true, action:closeApp })));
@@ -295,7 +312,7 @@
 
   function registerServiceWorker() {
     if (!('serviceWorker' in navigator)) return;
-    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=4',{scope:'./'}).catch(()=>{}), { once:true });
+    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js?v=5',{scope:'./'}).catch(()=>{}), { once:true });
   }
   function boot() {
     currentLanguage=detectLanguage(); applyLanguage(currentLanguage,{persist:false}); setMotionMode(storageGet(MOTION_KEY,'system'));

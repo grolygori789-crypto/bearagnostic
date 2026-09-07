@@ -102,7 +102,7 @@
   }
   function sendMail(){
     const {msg,body}=buildBody(); const t=c(); if(!msg){ api().showToast?.(t.required); return; }
-    const build=api().config?.build || 4;
+    const build=api().config?.build || 5;
     const subject=type==='report'?`Bearagnostic Build ${build} — Problem report`:`Bearagnostic Build ${build} — Feedback`;
     const href=`mailto:${encodeURIComponent(SUPPORT_EMAIL)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href=href;
@@ -115,13 +115,6 @@
     const t=c(); const ok=await api().copyText?.(api().diagnostics?.() || ''); api().showToast?.(ok?t.diagnosticsCopied:t.copyFailed); close();
   }
 
-  function localizeSettings(){
-    const t=c();
-    const r=document.getElementById('reportProblemHint'); if(r) r.textContent=t.reportSub;
-    const f=document.getElementById('sendFeedbackHint'); if(f) f.textContent=t.feedbackSub;
-  }
-
   window.BearagnosticHelp = Object.freeze({ openHub:renderHub, openComposer:renderComposer });
-  window.addEventListener('bearagnostic:languagechange',()=>{ localizeSettings(); if(overlay?.classList.contains('is-open')) view==='hub'?renderHub():renderComposer(type); });
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',localizeSettings,{once:true}); else localizeSettings();
+  window.addEventListener('bearagnostic:languagechange',()=>{ if(overlay?.classList.contains('is-open')) view==='hub'?renderHub():renderComposer(type); });
 })();

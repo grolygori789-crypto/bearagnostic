@@ -11,16 +11,16 @@
   <meta name="apple-mobile-web-app-title" content="Bearagnostic">
   <meta name="format-detection" content="telephone=no">
   <meta name="description" content="Bearagnostic is a premium, local-first file-health checkup assistant by Benedict Interactive.">
-  <meta name="application-version" content="0.1.3">
+  <meta name="application-version" content="0.1.4">
   <title>Bearagnostic</title>
-  <link rel="manifest" href="./manifest.webmanifest?v=4">
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=4">
-  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png?v=4">
+  <link rel="manifest" href="./manifest.webmanifest?v=5">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=5">
+  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png?v=5">
   <link rel="preload" as="image" href="./assets/mascot/dr-bear-approved.png">
-  <link rel="stylesheet" href="./css/app.css?v=4">
-  <link rel="stylesheet" href="./css/experience.css?v=4">
+  <link rel="stylesheet" href="./css/app.css?v=5">
+  <link rel="stylesheet" href="./css/experience.css?v=5">
 </head>
-<body data-build="4">
+<body data-build="5">
   <div id="orientationGuard" class="orientation-guard" role="alert" aria-live="assertive" hidden>
     <div class="orientation-guard__phone" aria-hidden="true"><span></span></div>
     <strong data-i18n="portraitTitle">Portrait mode only</strong>
@@ -56,7 +56,7 @@
           <small><b data-i18n="brandFileHealth">FILE HEALTH</b><i></i><b data-i18n="brandBrighterDays">BRIGHTER DAYS</b></small>
         </span>
       </button>
-      <button class="header-settings" id="settingsButton" type="button" data-i18n-aria="settingsAria" aria-label="Settings">
+      <button class="header-settings" id="settingsButton" type="button" data-i18n-aria="preferences" aria-label="Preferences">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.3 14.8a7.7 7.7 0 0 0 .1-1.3 7.7 7.7 0 0 0-.1-1.3l2-1.6-2-3.5-2.5 1a8.4 8.4 0 0 0-2.2-1.3L14.2 4h-4.1l-.4 2.8A8.4 8.4 0 0 0 7.5 8l-2.6-1-2 3.5 2 1.6a7.7 7.7 0 0 0-.1 1.3 7.7 7.7 0 0 0 .1 1.3l-2 1.6 2 3.5 2.6-1a8.4 8.4 0 0 0 2.2 1.3l.4 2.8h4.1l.4-2.8a8.4 8.4 0 0 0 2.2-1.3l2.5 1 2-3.5-2-1.5Z"/></svg>
       </button>
     </header>
@@ -129,49 +129,38 @@
       </section>
 
       <section class="screen more-screen" id="moreScreen" data-screen="more" hidden>
-        <div class="panel-head"><span data-i18n="moreKicker">MORE</span><h2 data-i18n="moreTitle">Bearagnostic</h2><p data-i18n="moreSub">Preferences, privacy, help and app information.</p></div>
+        <div class="panel-head"><span data-i18n="moreKicker">MORE</span><h2 data-i18n="moreTitle">Bearagnostic</h2></div>
         <div class="settings-list compact-list">
-          <button class="setting-link" type="button" data-open="settings"><span class="soft-icon blue"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 14.8a7 7 0 0 0 0-5.6l2-1.5-2-3.4-2.5 1a8 8 0 0 0-4.8-2.8l-.4-2.5H7.4L7 2.5a8 8 0 0 0-4.8 2.8l-2.5-1-2 3.4 2 1.5a7 7 0 0 0 0 5.6l-2 1.5 2 3.4 2.5-1A8 8 0 0 0 7 21.5l.4 2.5h3.9l.4-2.5a8 8 0 0 0 4.8-2.8l2.5 1 2-3.4-2-1.5Z"/></svg></span><span><strong data-i18n="preferences">Preferences</strong><small data-i18n="preferencesSub">Language, motion and full-screen behavior</small></span><b>›</b></button>
-          <button class="setting-link" type="button" data-open="privacy"><span class="soft-icon mint"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.7 2.8 8 7 10 4.2-2 7-5.3 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg></span><span><strong data-i18n="privacyLocal">Privacy & local data</strong><small data-i18n="privacyLocalSub">What stays on your device</small></span><b>›</b></button>
+          <button class="setting-link" id="privacyHubRow" type="button"><span class="soft-icon mint"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.7 2.8 8 7 10 4.2-2 7-5.3 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg></span><span><strong data-i18n="privacyLocal">Privacy & local data</strong><small data-i18n="privacyLocalSub">What stays on your device</small></span><b>›</b></button>
           <button class="setting-link" id="helpFeedbackHub" type="button"><span class="soft-icon violet"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9.7 9.5a2.5 2.5 0 1 1 4.4 1.6c-1.3 1.2-2.1 1.5-2.1 3"/><path d="M12 17h.01"/></svg></span><span><strong data-i18n="helpFeedback">Help & Feedback</strong><small data-i18n="helpFeedbackSub">Report a problem or send feedback</small></span><b>›</b></button>
           <button class="setting-link" id="supportProjectRow" type="button"><span class="soft-icon mint"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg></span><span><strong id="supportProjectTitle">Support Bearagnostic</strong><small id="supportProjectSub">Thailand via PromptPay · worldwide via Ko-fi</small></span><b>›</b></button>
-          <button class="setting-link" type="button" data-open="about"><span class="soft-icon amber"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 10v6"/><path d="M12 7h.01"/></svg></span><span><strong data-i18n="aboutBearagnostic">About Bearagnostic</strong><small>Benedict Interactive · v0.1.3 · Build 4</small></span><b>›</b></button>
+          <button class="setting-link" type="button" data-open="about"><span class="soft-icon amber"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 10v6"/><path d="M12 7h.01"/></svg></span><span><strong data-i18n="aboutBearagnostic">About Bearagnostic</strong><small>Benedict Interactive · v0.1.4 · Build 5</small></span><b>›</b></button>
           <button class="setting-link setting-link--close" type="button" data-close-app><span class="soft-icon red"><svg viewBox="0 0 24 24"><path d="M12 3v9"/><path d="M7 5.8a8 8 0 1 0 10 0"/></svg></span><span><strong data-i18n="closeBearagnostic">Close Bearagnostic</strong><small data-i18n="closeBearagnosticSub">End this app session</small></span><b>›</b></button>
         </div>
       </section>
 
-      <section class="screen settings-screen" id="settingsScreen" data-screen="settings" hidden>
-        <div class="settings-title-row"><button class="back-button" id="settingsBack" type="button" data-i18n-aria="backAria" aria-label="Back">‹</button><div><span data-i18n="preferencesKicker">PREFERENCES</span><h2 data-i18n="settings">Settings</h2></div></div>
-        <div class="settings-scroll">
-          <section class="settings-group"><h3 data-i18n="experience">Experience</h3>
+      <section class="screen settings-screen preferences-screen" id="preferencesScreen" data-screen="preferences" hidden>
+        <div class="settings-title-row"><button class="back-button" id="preferencesBack" type="button" data-i18n-aria="backAria" aria-label="Back">‹</button><div><span data-i18n="preferencesKicker">PREFERENCES</span><h2 data-i18n="preferences">Preferences</h2><p class="preferences-intro" data-i18n="preferencesSub">Language, motion and full-screen behavior</p></div></div>
+        <div class="settings-scroll preferences-scroll">
+          <section class="settings-group preferences-group">
             <div class="setting-row"><div><strong data-i18n="language">Language</strong><small data-i18n="languageSub">Choose the interface language</small></div><div class="segmented" data-language-group><button type="button" data-lang="en">EN</button><button type="button" data-lang="ja">日本語</button><button type="button" data-lang="th">ไทย</button></div></div>
             <div class="setting-row"><div><strong data-i18n="motion">Motion</strong><small data-i18n="motionSub">Choose how much interface motion you want</small></div><select id="motionSelect"><option value="system" data-i18n="motionSystem">System</option><option value="full" data-i18n="motionFull">Full</option><option value="reduced" data-i18n="motionReduced">Reduced</option></select></div>
             <div class="setting-row" id="browserFullscreenRow"><div><strong data-i18n="browserFullscreen">Browser Full Screen</strong><small data-i18n="browserFullscreenSub">Request full screen after your next tap</small></div><label class="switch"><input id="fullscreenToggle" type="checkbox"><span></span></label></div>
           </section>
+          <div class="preferences-boundary" aria-hidden="true"><span></span></div>
+        </div>
+      </section>
 
-          <section class="settings-group"><h3 data-i18n="privacyLocal">Privacy & local data</h3>
-            <button class="setting-link" type="button" data-open="privacy"><span><strong data-i18n="localAnalysis">Local analysis</strong><small data-i18n="localAnalysisSub">Selected files are not uploaded by the app in this version</small></span><b>›</b></button>
+      <section class="screen settings-screen privacy-screen" id="privacyScreen" data-screen="privacy" hidden>
+        <div class="settings-title-row"><button class="back-button" id="privacyBack" type="button" data-i18n-aria="backAria" aria-label="Back">‹</button><div><span data-i18n="privacyKicker">PRIVACY</span><h2 data-i18n="privacyLocal">Privacy & local data</h2></div></div>
+        <div class="settings-scroll privacy-scroll">
+          <section class="privacy-principle-card">
+            <span class="privacy-principle-card__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.7 2.8 8 7 10 4.2-2 7-5.3 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <div><strong data-i18n="localAnalysis">Local analysis</strong><div class="privacy-principle-card__copy" data-i18n-html="privacyBodyHtml"><p><strong>Selected files are analyzed locally.</strong> Bearagnostic does not upload selected file contents in the current version.</p><p>No account is required. Preferences and future checkup history are stored locally on this device unless you clear them.</p></div></div>
+          </section>
+          <section class="settings-group privacy-actions">
             <button class="setting-link" id="clearLocalData" type="button"><span><strong data-i18n="clearLocalData">Clear local app data</strong><small data-i18n="clearLocalDataSub">Reset preferences and local history</small></span><b>›</b></button>
           </section>
-
-          <section class="settings-group"><h3 data-i18n="helpFeedback">Help & Feedback</h3>
-            <button class="setting-link" id="reportProblem" type="button"><span><strong data-i18n="reportProblem">Report a Problem</strong><small id="reportProblemHint">Describe what happened inside the app</small></span><b>›</b></button>
-            <button class="setting-link" id="sendFeedback" type="button"><span><strong data-i18n="sendFeedback">Send Feedback</strong><small id="sendFeedbackHint">Share an idea or tell us what could be better</small></span><b>›</b></button>
-            <button class="setting-link" id="copyDiagnostics" type="button"><span><strong data-i18n="copyDiagnostics">Copy Diagnostic Info</strong><small data-i18n="copyDiagnosticsSub">Build and capability details only</small></span><b>›</b></button>
-          </section>
-
-          <section class="settings-group support-settings-group" id="supportSettingsGroup"><h3 id="supportGroupTitle">Support the Project</h3>
-            <p class="support-settings-note" id="supportGroupNote">Support is optional and never changes analysis, results, or access.</p>
-            <button class="support-card support-card--thai" id="promptPaySupportButton" type="button"><span class="support-card__badge" id="promptPayBadge">THAILAND</span><span class="support-card__copy"><strong id="promptPayTitle">Support with PromptPay</strong><small id="promptPaySub">Scan or save the verified QR</small></span><span class="support-card__arrow">›</span></button>
-            <button class="support-card support-card--world" id="kofiSupportButton" type="button"><span class="support-card__badge" id="kofiBadge">WORLDWIDE</span><span class="support-card__copy"><strong id="kofiTitle">Support on Ko-fi</strong><small id="kofiSub">Continue securely on Ko-fi</small></span><span class="support-card__arrow">↗</span></button>
-          </section>
-
-          <section class="about-box">
-            <img src="./assets/icons/app-icon-192.png" alt="" width="54" height="54">
-            <div><strong>Bearagnostic</strong><span>v0.1.3 · Build 4</span><span>Benedict Interactive · Bangkok, Thailand</span><small data-i18n="aboutPrivacyNote">Selected files are analyzed locally by Bearagnostic and are not uploaded by the app in the current version.</small></div>
-          </section>
-
-          <button class="close-app-row" type="button" data-close-app data-i18n="closeBearagnostic">Close Bearagnostic</button>
         </div>
       </section>
     </main>
@@ -184,7 +173,7 @@
       <button class="nav-button" type="button" data-nav="more"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg><span data-i18n="navMore">More</span></button>
     </nav>
 
-    <footer class="app-footer"><span class="app-footer__studio">BENEDICT INTERACTIVE</span><span class="app-footer__build">v0.1.3 · B4</span></footer>
+    <footer class="app-footer"><span class="app-footer__studio">BENEDICT INTERACTIVE</span><span class="app-footer__build">v0.1.4 · B5</span></footer>
   </div>
 
   <div class="modal-scrim" id="modalScrim" hidden></div>
@@ -211,10 +200,10 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <script src="./js/config/app-config.js?v=4"></script>
-  <script src="./js/config/i18n.js?v=4"></script>
-  <script src="./js/core/app.js?v=4"></script>
-  <script src="./js/support/help-feedback.js?v=4"></script>
-  <script src="./js/support/voluntary-support.js?v=4"></script>
+  <script src="./js/config/app-config.js?v=5"></script>
+  <script src="./js/config/i18n.js?v=5"></script>
+  <script src="./js/core/app.js?v=5"></script>
+  <script src="./js/support/help-feedback.js?v=5"></script>
+  <script src="./js/support/voluntary-support.js?v=5"></script>
 </body>
 </html>
