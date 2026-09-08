@@ -11,16 +11,17 @@
   <meta name="apple-mobile-web-app-title" content="Bearagnostic">
   <meta name="format-detection" content="telephone=no">
   <meta name="description" content="Bearagnostic is a premium, local-first file-health checkup assistant by Benedict Interactive.">
-  <meta name="application-version" content="0.1.9">
+  <meta name="application-version" content="0.2.0">
   <title>Bearagnostic</title>
-  <link rel="manifest" href="./manifest.webmanifest?v=10">
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=10">
-  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png?v=10">
+  <link rel="manifest" href="./manifest.webmanifest?v=11">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png?v=11">
+  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png?v=11">
   <link rel="preload" as="image" href="./assets/mascot/dr-bear-approved.png">
-  <link rel="stylesheet" href="./css/app.css?v=10">
-  <link rel="stylesheet" href="./css/experience.css?v=10">
+  <link rel="stylesheet" href="./css/app.css?v=11">
+  <link rel="stylesheet" href="./css/experience.css?v=11">
+  <link rel="stylesheet" href="./css/checkup.css?v=11">
 </head>
-<body data-build="6">
+<body data-build="11">
   <div id="orientationGuard" class="orientation-guard" role="alert" aria-live="assertive" hidden>
     <div class="orientation-guard__phone" aria-hidden="true"><span></span></div>
     <strong data-i18n="portraitTitle">Portrait mode only</strong>
@@ -108,9 +109,48 @@
         </section>
       </section>
 
-      <section class="screen utility-screen" id="checkupScreen" data-screen="checkup" hidden>
-        <div class="utility-head"><span data-i18n="checkupKicker">CHECKUP</span><h2 data-i18n="checkupTitle">Your next file checkup</h2><p data-i18n="checkupBody">The real analysis engine arrives in the next build. Nothing here pretends to scan your whole device.</p></div>
-        <div class="utility-empty"><img src="./assets/mascot/dr-bear-scanning.png" alt=""><strong data-i18n="checkupReady">Dr. Bear is ready.</strong><small data-i18n="checkupReadySub">File selection and real analysis are the next production step.</small></div>
+      <section class="screen scan-screen" id="checkupScreen" data-screen="checkup" data-state="idle" hidden>
+        <section class="scan-hero" aria-labelledby="scanTitle">
+          <img class="scan-hero__scene" src="./assets/brand/scanning-clinical-scene.webp" alt="Dr. Bear reviewing a tablet in the Bearagnostic clinic" draggable="false">
+          <div class="scan-stream-glow" aria-hidden="true"></div>
+          <div class="scan-file-stream" id="scanFileStream" aria-hidden="true"></div>
+          <div class="scan-copy">
+            <span class="scan-kicker" id="scanKicker">SCANNING YOUR FILES</span>
+            <h2 class="scan-title" id="scanTitle"><span id="scanTitleText">Ready for a checkup</span><span class="scan-title__dots" aria-hidden="true"><i>.</i><i>.</i><i>.</i></span></h2>
+            <p class="scan-subtitle" id="scanSubtitle">Choose files or a folder. Dr. Bear only checks what you select.</p>
+          </div>
+        </section>
+
+        <section class="scan-rail" aria-label="Checkup stages">
+          <div class="scan-rail__line" aria-hidden="true"><div class="scan-rail__progress" id="scanRailProgress"></div></div>
+          <div class="scan-stages">
+            <div class="scan-stage" data-scan-stage><span class="scan-stage__dot"><svg class="scan-stage__check" viewBox="0 0 24 24"><path d="m6 12 4 4 8-9"/></svg></span><strong>Preparing</strong><small>Getting ready</small></div>
+            <div class="scan-stage" data-scan-stage><span class="scan-stage__dot"><svg class="scan-stage__check" viewBox="0 0 24 24"><path d="m6 12 4 4 8-9"/></svg></span><strong>File Details</strong><small>Reading info</small></div>
+            <div class="scan-stage" data-scan-stage><span class="scan-stage__dot"><svg class="scan-stage__check" viewBox="0 0 24 24"><path d="m6 12 4 4 8-9"/></svg></span><strong>File Sizes</strong><small>Analyzing</small></div>
+            <div class="scan-stage" data-scan-stage><span class="scan-stage__dot"><svg class="scan-stage__check" viewBox="0 0 24 24"><path d="m6 12 4 4 8-9"/></svg></span><strong>Duplicates</strong><small>Finding matches</small></div>
+            <div class="scan-stage" data-scan-stage><span class="scan-stage__dot"><svg class="scan-stage__check" viewBox="0 0 24 24"><path d="m6 12 4 4 8-9"/></svg></span><strong>Modified Dates</strong><small>Checking dates</small></div>
+            <div class="scan-stage" data-scan-stage><span class="scan-stage__dot"><svg class="scan-stage__check" viewBox="0 0 24 24"><path d="m6 12 4 4 8-9"/></svg></span><strong>Finalizing</strong><small>Almost there</small></div>
+          </div>
+        </section>
+
+        <section class="scan-dashboard" aria-live="polite">
+          <div class="scan-progress">
+            <div class="scan-ring">
+              <svg viewBox="0 0 110 110" aria-hidden="true"><defs><linearGradient id="scanRingGradient" x1="14" y1="94" x2="94" y2="16" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#25c1ef"/><stop offset="1" stop-color="#197fea"/></linearGradient></defs><circle class="scan-ring__track" cx="55" cy="55" r="46"/><circle class="scan-ring__value" id="scanRingValue" cx="55" cy="55" r="46"/></svg>
+              <div class="scan-ring__copy"><strong><span id="scanPercent">0</span><small>%</small></strong><span id="scanRingLabel">READY</span></div>
+            </div>
+          </div>
+          <div class="scan-findings">
+            <div class="scan-finding"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v5h5"/></svg><b id="scanReviewed">0</b><span id="scanReviewedLabel">files reviewed</span></div>
+            <div class="scan-finding"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="11" height="13" rx="2"/><rect x="9" y="3" width="11" height="13" rx="2"/></svg><b id="scanDuplicates">0</b><span id="scanDuplicatesLabel">duplicate candidates</span></div>
+            <div class="scan-finding"><svg viewBox="0 0 24 24"><path d="M3 7h7l2 2h9v10H3z"/></svg><b id="scanLarge">0</b><span id="scanLargeLabel">large files noted</span></div>
+            <div class="scan-finding"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg><b id="scanOlder">0</b><span id="scanOlderLabel">older files found</span></div>
+          </div>
+          <div class="scan-quote"><span class="scan-quote__mark" aria-hidden="true">“</span><blockquote id="scanQuote">Your files. Your choice.</blockquote><small>— Dr. Bear</small></div>
+        </section>
+
+        <section class="scan-tip"><span class="scan-tip__bulb" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M8.3 14.6A6 6 0 1 1 15.7 14.6C14.7 15.4 14 16.4 14 18h-4c0-1.6-.7-2.6-1.7-3.4Z"/><path d="M12 2V1M4.9 4.9l-.8-.8M19.1 4.9l.8-.8M2 12H1M23 12h-1"/></svg></span><div class="scan-tip__copy"><strong id="scanTipTitle">Did you know?</strong><span id="scanTipBody">Selected files are analyzed locally.</span></div><span class="scan-tip__arrow" aria-hidden="true">›</span></section>
+        <div class="scan-bottom"><button class="scan-action" id="scanAction" type="button">Choose files or a folder</button><div class="scan-studio">BEARAGNOSTIC</div></div>
       </section>
 
       <section class="screen utility-screen" id="toolsScreen" data-screen="tools" hidden>
@@ -134,7 +174,7 @@
           <button class="setting-link" id="privacyHubRow" type="button"><span class="soft-icon mint"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.7 2.8 8 7 10 4.2-2 7-5.3 7-10V6Z"/><path d="m9 12 2 2 4-4"/></svg></span><span><strong data-i18n="privacyLocal">Privacy & local data</strong><small data-i18n="privacyLocalSub">What stays on your device</small></span><b>›</b></button>
           <button class="setting-link" id="helpFeedbackHub" type="button"><span class="soft-icon violet"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9.7 9.5a2.5 2.5 0 1 1 4.4 1.6c-1.3 1.2-2.1 1.5-2.1 3"/><path d="M12 17h.01"/></svg></span><span><strong data-i18n="helpFeedback">Help & Feedback</strong><small data-i18n="helpFeedbackSub">Report a problem or send feedback</small></span><b>›</b></button>
           <button class="setting-link" id="supportProjectRow" type="button"><span class="soft-icon mint"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg></span><span><strong id="supportProjectTitle">Support Bearagnostic</strong><small id="supportProjectSub">Thailand via PromptPay · worldwide via Ko-fi</small></span><b>›</b></button>
-          <button class="setting-link" type="button" data-open="about"><span class="soft-icon amber"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 10v6"/><path d="M12 7h.01"/></svg></span><span><strong data-i18n="aboutBearagnostic">About Bearagnostic</strong><small>Benedict Interactive · v0.1.9 · Build 10</small></span><b>›</b></button>
+          <button class="setting-link" type="button" data-open="about"><span class="soft-icon amber"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 10v6"/><path d="M12 7h.01"/></svg></span><span><strong data-i18n="aboutBearagnostic">About Bearagnostic</strong><small>Benedict Interactive · v0.2.0 · Build 11</small></span><b>›</b></button>
           <button class="setting-link setting-link--close" type="button" data-close-app><span class="soft-icon red"><svg viewBox="0 0 24 24"><path d="M12 3v9"/><path d="M7 5.8a8 8 0 1 0 10 0"/></svg></span><span><strong data-i18n="closeBearagnostic">Close Bearagnostic</strong><small data-i18n="closeBearagnosticSub">End this app session</small></span><b>›</b></button>
         </div>
       </section>
@@ -173,7 +213,7 @@
       <button class="nav-button" type="button" data-nav="more"><img class="nav-glass-icon" src="./assets/ui/glass-icons/more.webp" alt="" aria-hidden="true"><span data-i18n="navMore">More</span></button>
     </nav>
 
-    <footer class="app-footer"><span class="app-footer__studio">BENEDICT INTERACTIVE</span><span class="app-footer__build">v0.1.9 · B10</span></footer>
+    <footer class="app-footer"><span class="app-footer__studio">BENEDICT INTERACTIVE</span><span class="app-footer__build">v0.2.0 · B11</span></footer>
   </div>
 
   <div class="modal-scrim" id="modalScrim" hidden></div>
@@ -196,14 +236,27 @@
     <div class="sheet__handle"></div><h2 id="confirmTitle"></h2><p id="confirmBody"></p><div class="sheet-actions"><button class="primary-button" id="confirmPrimary" type="button"></button><button class="ghost-button" id="confirmCancel" type="button" data-i18n="cancel">Cancel</button></div>
   </section>
 
+  <section class="scan-picker" id="scanPicker" role="dialog" aria-modal="true" aria-labelledby="scanPickerTitle" hidden>
+    <div class="scan-picker__sheet">
+      <div class="scan-picker__handle"></div><span class="scan-picker__eyebrow" id="scanPickerEyebrow">LOCAL CHECKUP</span><h2 id="scanPickerTitle">What should Dr. Bear check?</h2><p class="scan-picker__lead" id="scanPickerLead">Choose files or a folder. Bearagnostic analyzes only what you explicitly select.</p>
+      <div class="scan-picker__options">
+        <button class="scan-picker__option" id="scanChooseFiles" type="button"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v5h5"/><path d="M10 13h5M10 16h5"/></svg><span><strong id="scanChooseFilesText">Choose files</strong><small id="scanChooseFilesSub">Select one or more files</small></span></button>
+        <button class="scan-picker__option" id="scanChooseFolder" type="button"><svg viewBox="0 0 24 24"><path d="M3.5 7h6l2-2H20a1.5 1.5 0 0 1 1.5 1.5V18A1.5 1.5 0 0 1 20 19.5H4A1.5 1.5 0 0 1 2.5 18V8A1 1 0 0 1 3.5 7Z"/></svg><span><strong id="scanChooseFolderText">Choose folder</strong><small id="scanChooseFolderSub">Analyze a folder you select</small></span></button>
+      </div>
+      <p class="scan-picker__privacy" id="scanPickerPrivacy">Selected file contents stay on this device in the current version.</p><button class="scan-picker__cancel" id="scanPickerCancel" type="button">Cancel</button>
+      <input id="scanFileInput" type="file" multiple hidden><input id="scanFolderInput" type="file" multiple webkitdirectory directory hidden>
+    </div>
+  </section>
+
   <section class="exit-screen" id="exitScreen" hidden><div><img src="./assets/icons/app-icon-192.png" alt="" width="84" height="84"><h2 data-i18n="exitReadyTitle">Bearagnostic is ready to close.</h2><p data-i18n="exitReadyBody">Use your device Home or Back control to leave the app.</p><button id="returnToApp" type="button" data-i18n="returnToApp">Return to Bearagnostic</button></div></section>
 
   <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-  <script src="./js/config/app-config.js?v=10"></script>
-  <script src="./js/config/i18n.js?v=10"></script>
-  <script src="./js/core/app.js?v=10"></script>
-  <script src="./js/support/help-feedback.js?v=10"></script>
-  <script src="./js/support/voluntary-support.js?v=10"></script>
+  <script src="./js/config/app-config.js?v=11"></script>
+  <script src="./js/config/i18n.js?v=11"></script>
+  <script src="./js/core/app.js?v=11"></script>
+  <script src="./js/core/checkup.js?v=11"></script>
+  <script src="./js/support/help-feedback.js?v=11"></script>
+  <script src="./js/support/voluntary-support.js?v=11"></script>
 </body>
 </html>
